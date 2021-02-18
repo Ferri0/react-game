@@ -16,6 +16,7 @@
       {
         "empty-line-between-groups": false
       }
-    ]
+    ],
+    "selector-max-id": 1
   }
 }
