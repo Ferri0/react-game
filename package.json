@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Study project RSSchool 2021Q1 React",
   "main": "index.js",
+  "private": "true",
   "scripts": {
     "postinstall": "husky install",
     "prettier": "prettier --check .",
@@ -35,8 +36,11 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "stylelint": "^13.10.0",
+    "stylelint-config-airbnb": "0.0.0",
+    "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.19.0"
   },
   "lint-staged": {
