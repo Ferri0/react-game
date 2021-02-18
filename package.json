@@ -1,0 +1,48 @@
+{
+  "name": "2048-clone",
+  "version": "1.0.0",
+  "description": "Study project RSSchool 2021Q1 React",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "husky install",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "eslint": "eslint **/*.js",
+    "eslint:fix": "eslint --fix **/*.js",
+    "stylelint": "stylelint **/*{.css,.scss}",
+    "stylelint:fix": "stylelint **/*{.css,.scss} --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ferri0/react-game.git"
+  },
+  "keywords": [],
+  "author": "Ferri0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ferri0/react-game/issues"
+  },
+  "homepage": "https://github.com/Ferri0/react-game#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.10.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.19.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix",
+    "*.css": "stylelint",
+    "*.scss": "stylelint --syntax=scss",
+    "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
+  }
+}
