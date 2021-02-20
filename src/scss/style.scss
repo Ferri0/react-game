@@ -1,6 +1,8 @@
 // abstracts
-@import './abstracts/constants.scss';
-@import './abstracts/mixins.scss';
+@import './abstracts/constants';
+@import './abstracts/mixins';
 // base
-@import './base/base.scss';
-@import './base/normalize.scss';
+@import './base/base';
+@import './base/normalize';
+// components
+@import './components/menu/menu';

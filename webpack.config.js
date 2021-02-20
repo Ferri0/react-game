@@ -11,7 +11,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const config = {
-  mode: 'development',
   entry: {
     main: path.resolve(__dirname, './src/components/index.jsx'),
   },
@@ -81,7 +80,7 @@ const config = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
 };
 

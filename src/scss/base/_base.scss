@@ -1,0 +1,29 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  @media (min-width: 375px) {
+    font-size: 12px;
+  }
+  @media (max-height: 600px) {
+    font-size: 10px;
+  }
+  @media (max-height: 500px) {
+    font-size: 8px;
+  }
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  background-color: $root-bg-color;
+  @include flex(column, center, center);
+  @media (max-height: 500px) {
+    height: auto;
+    padding: 1rem;
+  }
+}
