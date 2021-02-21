@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../utility/Button';
-import Title from './Title';
+import Button from '../presentational/Button';
+import Title from '../presentational/Title';
 
 class Rate extends React.Component {
   returnToMain() {

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Main from './Main';
-import Challenges from './Challenges';
-import Settings from './Settings';
-import Rate from './Rate';
-import Tutorial from './Tutorial';
+import Main from './container/Main';
+import Challenges from './container/Challenges';
+import Settings from './container/Settings';
+import Rate from './container/Rate';
+import Tutorial from './container/Tutorial';
 
 class Menu extends React.Component {
   constructor(props) {

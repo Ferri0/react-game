@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../utility/Button';
-import Title from './Title';
+import Button from '../presentational/Button';
+import Title from '../presentational/Title';
 
-class Tutorial extends React.Component {
+class Settings extends React.Component {
   returnToMain() {
     const { returnToMain } = this.props;
     returnToMain();
@@ -12,8 +12,8 @@ class Tutorial extends React.Component {
   render() {
     return (
       <div className="menu">
-        {Title('Tutorial')}
-        <div className="menu__tutorial">TUTORIAL</div>
+        {Title('Settings')}
+        <div className="menu__settings">SETTINGS</div>
         <Button
           className="menu__button"
           onClick={() => this.returnToMain()}
@@ -24,8 +24,8 @@ class Tutorial extends React.Component {
   }
 }
 
-Tutorial.propTypes = {
+Settings.propTypes = {
   returnToMain: PropTypes.func.isRequired,
 };
 
-export default Tutorial;
+export default Settings;

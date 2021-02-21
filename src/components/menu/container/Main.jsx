@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../utility/Button';
+import Button from '../presentational/Button';
 
 // TODO: remove this comment and create functional component?
 // eslint-disable-next-line react/prefer-stateless-function
@@ -8,15 +8,18 @@ class Main extends React.Component {
   render() {
     const { changeAppMode, setMenuPage } = this.props;
     const menuBtnsNames = [
-      'keep going',
-      'new game',
-      'challenges',
-      'settings',
-      'how to play',
-      'rate',
+      'Keep Going',
+      'New Game',
+      'Challenges',
+      'Settings',
+      'How To Play',
+      'Rate',
     ];
     const menuBtnsElements = menuBtnsNames.map((btnName) => {
-      if (btnName === 'keep going' || btnName === 'new game') {
+      if (
+        btnName.toLowerCase() === 'keep going' ||
+        btnName.toLowerCase() === 'new game'
+      ) {
         return (
           <Button
             key={btnName}
@@ -27,7 +30,7 @@ class Main extends React.Component {
         );
       }
 
-      if (btnName === 'how to play') {
+      if (btnName.toLowerCase() === 'how to play') {
         return (
           <Button
             key="tutorial"
@@ -42,7 +45,7 @@ class Main extends React.Component {
         <Button
           key={btnName}
           className="menu__button"
-          onClick={() => setMenuPage(btnName)}
+          onClick={() => setMenuPage(btnName.toLowerCase())}
           innerText={btnName}
         />
       );

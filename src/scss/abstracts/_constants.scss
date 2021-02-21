@@ -1,8 +1,20 @@
-// size
-$menu-block-width: 25rem;
-$menu-block-height: 35rem;
-$menu-title-height: 5rem;
-$menu-btn-height: 7rem;
+// root
+$root-bg-color: #fbf8ef;
 
-// colors
-$root-bg-color: #fae988;
+// menu
+// general
+$menu-bg-color: #bfaca0;
+$menu-block-bg-color: #f1e4da;
+$menu-block-width: 25rem;
+$menu-block-height: 32.5rem;
+$menu-title-height: 5rem;
+$menu-border-radius: 0.5rem;
+// button
+$menu-btn-bg-color: #f1e4da;
+$menu-btn-text-color: #796e65;
+$menu-btn-hover-bg-color: #f5cf73;
+$menu-btn-hover-text-color: #faf6f2;
+$menu-btn-height: 6.5rem;
+// title - same as menu button
+$menu-title-bg-color: $menu-btn-hover-bg-color;
+$menu-title-text-color: $menu-btn-hover-text-color;

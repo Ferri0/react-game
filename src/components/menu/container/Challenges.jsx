@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../utility/Button';
-import Title from './Title';
+import Button from '../presentational/Button';
+import Title from '../presentational/Title';
 
-class Settings extends React.Component {
+class Challenges extends React.Component {
   returnToMain() {
     const { returnToMain } = this.props;
     returnToMain();
@@ -12,8 +12,8 @@ class Settings extends React.Component {
   render() {
     return (
       <div className="menu">
-        {Title('Settings')}
-        <div className="menu__settings">SETTINGS</div>
+        {Title('Challenges')}
+        <div className="menu__challenges">CHALLENGES</div>
         <Button
           className="menu__button"
           onClick={() => this.returnToMain()}
@@ -24,8 +24,8 @@ class Settings extends React.Component {
   }
 }
 
-Settings.propTypes = {
+Challenges.propTypes = {
   returnToMain: PropTypes.func.isRequired,
 };
 
-export default Settings;
+export default Challenges;

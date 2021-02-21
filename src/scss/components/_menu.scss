@@ -1,0 +1,72 @@
+.menu {
+  width: 30rem;
+  height: 50rem;
+  padding: 2rem 0;
+  // color: $menu-text-color;
+  background-color: $menu-bg-color;
+  @include flex(column, space-between, center);
+}
+
+.menu__title {
+  width: $menu-block-width;
+  height: $menu-title-height;
+  color: $menu-title-text-color;
+  font-weight: 700;
+  font-size: 4rem;
+  background-color: $menu-title-bg-color;
+  border-radius: $menu-border-radius;
+  @include flex(row, center, center);
+}
+
+.menu__button {
+  width: $menu-block-width;
+  height: $menu-btn-height;
+  color: $menu-btn-text-color;
+  font-weight: 700;
+  font-size: 3rem;
+  background-color: $menu-btn-bg-color;
+  border: 0;
+  border-radius: $menu-border-radius;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.25s;
+  transition-property: background-color, color;
+  @include flex(row, center, center);
+
+  &:hover {
+    color: $menu-btn-hover-text-color;
+    background-color: $menu-btn-hover-bg-color;
+  }
+
+  &:focus {
+    border: 2px solid $menu-btn-text-color;
+  }
+}
+
+.menu__challenges {
+  width: $menu-block-width;
+  height: $menu-block-height;
+  background-color: $menu-block-bg-color;
+  border-radius: $menu-border-radius;
+}
+
+.menu__settings {
+  width: $menu-block-width;
+  height: $menu-block-height;
+  background-color: $menu-block-bg-color;
+  border-radius: $menu-border-radius;
+}
+
+.menu__leaderboard {
+  width: $menu-block-width;
+  height: $menu-block-height;
+  background-color: $menu-block-bg-color;
+  border-radius: $menu-border-radius;
+}
+
+.menu__tutorial {
+  width: $menu-block-width;
+  height: $menu-block-height;
+  background-color: $menu-block-bg-color;
+  border-radius: $menu-border-radius;
+}
