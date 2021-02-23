@@ -2,8 +2,8 @@
   width: 30rem;
   height: 50rem;
   padding: 2rem 0;
-  // color: $menu-text-color;
   background-color: $menu-bg-color;
+  border-radius: $border-radius;
   @include flex(column, space-between, center);
 }
 
@@ -14,7 +14,7 @@
   font-weight: 700;
   font-size: 4rem;
   background-color: $menu-title-bg-color;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
   @include flex(row, center, center);
 }
 
@@ -26,7 +26,7 @@
   font-size: 3rem;
   background-color: $menu-btn-bg-color;
   border: 0;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
   outline: 0;
   cursor: pointer;
   transition: all 0.25s;
@@ -47,26 +47,26 @@
   width: $menu-block-width;
   height: $menu-block-height;
   background-color: $menu-block-bg-color;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
 }
 
 .menu__settings {
   width: $menu-block-width;
   height: $menu-block-height;
   background-color: $menu-block-bg-color;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
 }
 
 .menu__leaderboard {
   width: $menu-block-width;
   height: $menu-block-height;
   background-color: $menu-block-bg-color;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
 }
 
 .menu__tutorial {
   width: $menu-block-width;
   height: $menu-block-height;
   background-color: $menu-block-bg-color;
-  border-radius: $menu-border-radius;
+  border-radius: $border-radius;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Menu from './menu/Menu';
-import GameBoard from './game/GameBoard';
+import Game from './game/statefull/Game';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends React.Component {
     if (mode === 'inMenu') {
       return <Menu changeAppMode={this.changeAppMode} />;
     }
-    return <GameBoard />;
+    return <Game changeAppMode={this.changeAppMode} />;
   }
 }
 

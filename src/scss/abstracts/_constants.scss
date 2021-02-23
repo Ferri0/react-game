@@ -1,14 +1,14 @@
-// root
+// general
 $root-bg-color: #fbf8ef;
+$border-radius: 0.5rem;
 
-// menu
+// menu component
 // general
 $menu-bg-color: #bfaca0;
 $menu-block-bg-color: #f1e4da;
 $menu-block-width: 25rem;
 $menu-block-height: 32.5rem;
 $menu-title-height: 5rem;
-$menu-border-radius: 0.5rem;
 // button
 $menu-btn-bg-color: #f1e4da;
 $menu-btn-text-color: #796e65;
@@ -18,3 +18,16 @@ $menu-btn-height: 6.5rem;
 // title - same as menu button
 $menu-title-bg-color: $menu-btn-hover-bg-color;
 $menu-title-text-color: $menu-btn-hover-text-color;
+
+// game component
+// general
+$game-bg-color: $menu-bg-color;
+$game-text-color: #faf6f2;
+// cell
+$game-cell-bg-color: #d0c1b4;
+$game-cell-text-color: $menu-btn-text-color;
+// button
+$game-btn-bg-color: #e7853f;
+// title
+// $game-title-bg-color: #f5cf73;
+$game-title-bg-color: #ffc524;
