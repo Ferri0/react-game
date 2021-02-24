@@ -1,11 +1,11 @@
 import getCellValue from './getCellValue';
 
 const shift = {
-  horizontal(cellMap, cellProps, destinition) {
+  horizontal(cellMap, cellProps, destination) {
     const updatedMap = [];
     cellMap.forEach((inputRow) => {
       let row = inputRow;
-      if (destinition === 'right') row = row.slice().reverse();
+      if (destination === 'right') row = row.slice().reverse();
       for (let i = 0; i < row.length; i += 1) {
         if (
           getCellValue(row[i], cellProps) > 0 &&
@@ -15,16 +15,16 @@ const shift = {
           i = 0;
         }
       }
-      if (destinition === 'right') row.reverse();
+      if (destination === 'right') row.reverse();
       updatedMap.push(row);
     });
     return updatedMap;
   },
 
-  vertical(cellMap, cellProps, destinition) {
+  vertical(cellMap, cellProps, destination) {
     const updatedMap = cellMap.slice();
     for (let column = 0; column < updatedMap[0].length; column += 1) {
-      if (destinition === 'top') {
+      if (destination === 'top') {
         for (let i = 0; i < updatedMap.length; i += 1) {
           if (
             i > 0 &&
@@ -38,7 +38,7 @@ const shift = {
             i = 0;
           }
         }
-      } else if (destinition === 'bottom') {
+      } else if (destination === 'bottom') {
         for (let i = updatedMap.length - 1; i > -1; i -= 1) {
           if (
             i + 1 < updatedMap.length &&
