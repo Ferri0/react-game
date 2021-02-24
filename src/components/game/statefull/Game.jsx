@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GameBoard from '../stateless/GameBoard';
 import GameHeader from '../stateless/GameHeader';
+import shift from '../util/shift';
 
 class Game extends React.Component {
   constructor(props) {
@@ -32,17 +33,19 @@ class Game extends React.Component {
         [13, 14, 15, 16],
       ],
     };
-    this.testFunc = this.testFunc.bind(this);
+    this.horizontalShift = this.horizontalShift.bind(this);
+    this.verticalShift = this.verticalShift.bind(this);
   }
 
-  testFunc() {
+  horizontalShift(cellMap, cellProps, destinition) {
     this.setState({
-      cellMap: [
-        [1, 2, 11, 4],
-        [5, 6, 7, 8],
-        [9, 10, 3, 12],
-        [13, 14, 15, 16],
-      ],
+      cellMap: shift.horizontal(cellMap, cellProps, destinition),
+    });
+  }
+
+  verticalShift(cellMap, cellProps, destinition) {
+    this.setState({
+      cellMap: shift.vertical(cellMap, cellProps, destinition),
     });
   }
 
@@ -54,8 +57,29 @@ class Game extends React.Component {
       <div className="game">
         <GameHeader score={0} bestScore={1024} changeAppMode={changeAppMode} />
         <GameBoard cellProps={cellProps} cellMap={cellMap} />
-        <button type="button" onClick={this.testFunc}>
-          TEST
+        <button
+          type="button"
+          onClick={() => this.horizontalShift(cellMap, cellProps, 'left')}
+        >
+          LEFT
+        </button>
+        <button
+          type="button"
+          onClick={() => this.horizontalShift(cellMap, cellProps, 'right')}
+        >
+          RIGHT
+        </button>
+        <button
+          type="button"
+          onClick={() => this.verticalShift(cellMap, cellProps, 'top')}
+        >
+          TOP
+        </button>
+        <button
+          type="button"
+          onClick={() => this.verticalShift(cellMap, cellProps, 'bottom')}
+        >
+          BOTTOM
         </button>
       </div>
     );

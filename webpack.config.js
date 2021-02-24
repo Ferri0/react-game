@@ -7,8 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// Uncomment when have to analyze bundle composition
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const config = {
   entry: {
@@ -40,11 +39,6 @@ const config = {
         },
       ],
     }),
-    // Uncomment when have to analyze bundle composition
-    // new BundleAnalyzerPlugin({
-    //   analyzerPort: 8000,
-    //   openAnalyzer: true,
-    // }),
   ],
   module: {
     rules: [
@@ -90,6 +84,10 @@ module.exports = (env, argv) => {
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: 'style.css',
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerPort: 8000,
+        openAnalyzer: true,
       })
     );
     config.module.rules.push({
