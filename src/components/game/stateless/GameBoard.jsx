@@ -22,12 +22,12 @@ class GameBoard extends React.Component {
   }
 
   render() {
-    const { gameState } = this.props;
+    const { cellProps, cellMap } = this.props;
 
     return (
       <div className="game__board--wrapper">
         <div className="game__board--inner">
-          <ActiveCellsSet gameState={gameState} />
+          <ActiveCellsSet cellProps={cellProps} cellMap={cellMap} />
           <StaticCellsSet numOfCells={16} />
         </div>
       </div>
@@ -36,7 +36,15 @@ class GameBoard extends React.Component {
 }
 
 GameBoard.propTypes = {
-  gameState: PropTypes.arrayOf(PropTypes.array).isRequired,
+  cellProps: PropTypes.arrayOf(
+    PropTypes.shape({
+      k: PropTypes.number.isRequired,
+      v: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  cellMap: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+  ).isRequired,
 };
 
 export default GameBoard;

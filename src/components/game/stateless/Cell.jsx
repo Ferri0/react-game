@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Cell({ cellStyle, cellValue }) {
-  if (cellValue !== 0) {
-    return (
-      <div className="game__cell--wrapper" style={cellStyle}>
-        <div className={`game__cell--inner value-${cellValue}`}>
-          {cellValue}
-        </div>
-      </div>
-    );
-  }
-  return null;
+function Cell({ cellStyle, cellValue }) {
+  return (
+    <div className="game__cell--wrapper" style={cellStyle}>
+      <div className={`game__cell--inner value-${cellValue}`}>{cellValue}</div>
+    </div>
+  );
 }
 
 Cell.propTypes = {
@@ -22,3 +17,6 @@ Cell.propTypes = {
   }).isRequired,
   cellValue: PropTypes.number.isRequired,
 };
+
+const getCell = React.memo(Cell);
+export default getCell;

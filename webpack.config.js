@@ -21,7 +21,7 @@ const config = {
     publicPath: '',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, './'),
     hot: true,
     open: true,
   },
@@ -42,9 +42,9 @@ const config = {
     }),
     // Uncomment when have to analyze bundle composition
     // new BundleAnalyzerPlugin({
-    //  analyzerPort: 8000,
-    //  openAnalyzer: true,
-    // })
+    //   analyzerPort: 8000,
+    //   openAnalyzer: true,
+    // }),
   ],
   module: {
     rules: [
