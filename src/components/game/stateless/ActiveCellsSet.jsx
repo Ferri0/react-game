@@ -15,6 +15,7 @@ export default function ActiveCellsSet({ cellProps, cellMap }) {
       left: cellSide * cellCords.x,
     };
     if (props.v === 0) {
+      cellStyle.animation = 'none';
       cellStyle.transition = 'none';
       cellStyle.visibility = 'hidden';
     }

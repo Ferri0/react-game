@@ -139,6 +139,15 @@
   @include flex(column, center, center);
 }
 
+@keyframes appear {
+  from {
+    transform: scale(0.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .value-2 {
   background-color: #f1e4da;
 }
