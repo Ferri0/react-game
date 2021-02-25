@@ -9,14 +9,15 @@ export default function ActiveCellsSet({ cellProps, cellMap }) {
   const cellSide = getRemValue() * 7.2;
   cellProps.forEach((props) => {
     const cellCords = getCellCords(props.k, cellMap);
-    let cellVisibility = 'visible';
-    if (props.v === 0) cellVisibility = 'hidden';
     const cellStyle = {
-      visibility: cellVisibility,
       position: 'absolute',
       top: cellSide * cellCords.y,
       left: cellSide * cellCords.x,
     };
+    if (props.v === 0) {
+      cellStyle.transition = 'none';
+      cellStyle.visibility = 'hidden';
+    }
     cellElemsArray.push(
       <Cell cellValue={props.v} cellStyle={cellStyle} key={props.k} />
     );

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import GameBoard from '../stateless/GameBoard';
 import GameHeader from '../stateless/GameHeader';
 import shift from '../util/shift';
+import addRandomCell from '../util/addRandomCell';
 
 class Game extends React.Component {
   constructor(props) {
@@ -10,20 +11,20 @@ class Game extends React.Component {
     this.state = {
       cellProps: [
         { k: 1, v: 2 },
-        { k: 2, v: 2 },
+        { k: 2, v: 0 },
         { k: 3, v: 0 },
-        { k: 4, v: 2 },
-        { k: 5, v: 2 },
+        { k: 4, v: 0 },
+        { k: 5, v: 0 },
         { k: 6, v: 2 },
-        { k: 7, v: 2 },
+        { k: 7, v: 0 },
         { k: 8, v: 0 },
-        { k: 9, v: 2 },
-        { k: 10, v: 2 },
+        { k: 9, v: 0 },
+        { k: 10, v: 0 },
         { k: 11, v: 0 },
         { k: 12, v: 0 },
-        { k: 13, v: 2 },
-        { k: 14, v: 2 },
-        { k: 15, v: 2 },
+        { k: 13, v: 0 },
+        { k: 14, v: 0 },
+        { k: 15, v: 0 },
         { k: 16, v: 0 },
       ],
       cellMap: [
@@ -47,12 +48,24 @@ class Game extends React.Component {
   }
 
   globalClickHandler(e) {
+    window.removeEventListener('keydown', this.globalClickHandler);
     const { cellProps, cellMap } = this.state;
     if (e.key === 'ArrowUp') this.verticalShift(cellMap, cellProps, 'top');
-    if (e.key === 'ArrowDown') this.verticalShift(cellMap, cellProps, 'bottom');
-    if (e.key === 'ArrowRight')
+    else if (e.key === 'ArrowDown')
+      this.verticalShift(cellMap, cellProps, 'bottom');
+    else if (e.key === 'ArrowRight')
       this.horizontalShift(cellMap, cellProps, 'right');
-    if (e.key === 'ArrowLeft') this.horizontalShift(cellMap, cellProps, 'left');
+    else if (e.key === 'ArrowLeft')
+      this.horizontalShift(cellMap, cellProps, 'left');
+    else {
+      window.addEventListener('keydown', this.globalClickHandler);
+      return;
+    }
+    setTimeout(() => {
+      const { cellProps: cellPropsUpdated } = this.state;
+      this.setState({ cellProps: addRandomCell(cellPropsUpdated) });
+      window.addEventListener('keydown', this.globalClickHandler);
+    }, 0);
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
