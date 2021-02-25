@@ -9,20 +9,20 @@ class Game extends React.Component {
     super(props);
     this.state = {
       cellProps: [
-        { k: 1, v: 0 },
-        { k: 2, v: 0 },
-        { k: 3, v: 2 },
-        { k: 4, v: 0 },
-        { k: 5, v: 0 },
-        { k: 6, v: 0 },
-        { k: 7, v: 0 },
+        { k: 1, v: 2 },
+        { k: 2, v: 2 },
+        { k: 3, v: 0 },
+        { k: 4, v: 2 },
+        { k: 5, v: 2 },
+        { k: 6, v: 2 },
+        { k: 7, v: 2 },
         { k: 8, v: 0 },
-        { k: 9, v: 0 },
+        { k: 9, v: 2 },
         { k: 10, v: 2 },
         { k: 11, v: 0 },
         { k: 12, v: 0 },
-        { k: 13, v: 0 },
-        { k: 14, v: 0 },
+        { k: 13, v: 2 },
+        { k: 14, v: 2 },
         { k: 15, v: 2 },
         { k: 16, v: 0 },
       ],
@@ -38,14 +38,24 @@ class Game extends React.Component {
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
+    const { map, props } =
+      destinition === 'left'
+        ? shift.left(cellMap, cellProps)
+        : shift.right(cellMap, cellProps);
     this.setState({
-      cellMap: shift.horizontal(cellMap, cellProps, destinition),
+      cellMap: map,
+      cellProps: props,
     });
   }
 
   verticalShift(cellMap, cellProps, destinition) {
+    const { map, props } =
+      destinition === 'top'
+        ? shift.top(cellMap, cellProps)
+        : shift.bottom(cellMap, cellProps);
     this.setState({
-      cellMap: shift.vertical(cellMap, cellProps, destinition),
+      cellMap: map,
+      cellProps: props,
     });
   }
 

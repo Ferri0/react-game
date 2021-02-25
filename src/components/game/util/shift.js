@@ -1,60 +1,146 @@
 import getCellValue from './getCellValue';
 
 const shift = {
-  horizontal(cellMap, cellProps, destination) {
-    const updatedMap = [];
-    cellMap.forEach((inputRow) => {
-      let row = inputRow;
-      if (destination === 'right') row = row.slice().reverse();
+  left(cellMap, cellProps) {
+    const updatedMap = cellMap.slice();
+    const updatedCellProps = cellProps.slice();
+    updatedMap.forEach((inputRow, rowIndex) => {
+      const row = inputRow;
       for (let i = 0; i < row.length; i += 1) {
         if (
-          getCellValue(row[i], cellProps) > 0 &&
-          getCellValue(row[i - 1], cellProps) === 0
+          getCellValue(row[i], updatedCellProps) > 0 &&
+          getCellValue(row[i - 1], updatedCellProps) === 0
         ) {
           [row[i], row[i - 1]] = [row[i - 1], row[i]];
+          updatedMap[rowIndex][i] = row[i];
+          updatedMap[rowIndex][i - 1] = row[i - 1];
           i = 0;
+        } else if (
+          getCellValue(row[i], updatedCellProps) ===
+          getCellValue(row[i - 1], updatedCellProps)
+        ) {
+          updatedCellProps.forEach((cellProp, index) => {
+            if (row[i - 1] === cellProp.k) {
+              updatedCellProps[index] = {
+                k: cellProp.k,
+                v: getCellValue(row[i - 1], updatedCellProps) * 2,
+              };
+            } else if (row[i] === cellProp.k) {
+              updatedCellProps[index] = { k: cellProp.k, v: 0 };
+            }
+          });
         }
       }
-      if (destination === 'right') row.reverse();
-      updatedMap.push(row);
     });
-    return updatedMap;
+    return { map: updatedMap, props: updatedCellProps };
   },
 
-  vertical(cellMap, cellProps, destination) {
+  right(cellMap, cellProps) {
     const updatedMap = cellMap.slice();
-    for (let column = 0; column < updatedMap[0].length; column += 1) {
-      if (destination === 'top') {
-        for (let i = 0; i < updatedMap.length; i += 1) {
-          if (
-            i > 0 &&
-            getCellValue(updatedMap[i][column], cellProps) > 0 &&
-            getCellValue(updatedMap[i - 1][column], cellProps) === 0
-          ) {
-            [updatedMap[i - 1][column], updatedMap[i][column]] = [
-              updatedMap[i][column],
-              updatedMap[i - 1][column],
-            ];
-            i = 0;
-          }
+    const updatedCellProps = cellProps.slice();
+    updatedMap.forEach((inputRow, rowIndex) => {
+      const row = inputRow;
+      for (let i = row.length - 1; i >= 0; i -= 1) {
+        if (
+          getCellValue(row[i], updatedCellProps) > 0 &&
+          getCellValue(row[i + 1], updatedCellProps) === 0
+        ) {
+          [row[i], row[i + 1]] = [row[i + 1], row[i]];
+          updatedMap[rowIndex][i] = row[i];
+          updatedMap[rowIndex][i + 1] = row[i + 1];
+          i = row.length - 1;
+        } else if (
+          getCellValue(row[i], updatedCellProps) ===
+          getCellValue(row[i + 1], updatedCellProps)
+        ) {
+          updatedCellProps.forEach((cellProp, index) => {
+            if (row[i + 1] === cellProp.k) {
+              updatedCellProps[index] = {
+                k: cellProp.k,
+                v: getCellValue(row[i + 1], updatedCellProps) * 2,
+              };
+            } else if (row[i] === cellProp.k) {
+              updatedCellProps[index] = { k: cellProp.k, v: 0 };
+            }
+          });
         }
-      } else if (destination === 'bottom') {
-        for (let i = updatedMap.length - 1; i > -1; i -= 1) {
-          if (
-            i + 1 < updatedMap.length &&
-            getCellValue(updatedMap[i][column], cellProps) > 0 &&
-            getCellValue(updatedMap[i + 1][column], cellProps) === 0
-          ) {
-            [updatedMap[i + 1][column], updatedMap[i][column]] = [
-              updatedMap[i][column],
-              updatedMap[i + 1][column],
-            ];
-            i = updatedMap.length - 1;
-          }
+      }
+    });
+    return { map: updatedMap, props: updatedCellProps };
+  },
+
+  top(cellMap, cellProps) {
+    const updatedMap = cellMap.slice();
+    const updatedCellProps = cellProps.slice();
+    for (let column = 0; column < updatedMap[0].length; column += 1) {
+      for (let i = 0; i < updatedMap.length; i += 1) {
+        if (
+          i > 0 &&
+          getCellValue(updatedMap[i][column], updatedCellProps) > 0 &&
+          getCellValue(updatedMap[i - 1][column], updatedCellProps) === 0
+        ) {
+          [updatedMap[i - 1][column], updatedMap[i][column]] = [
+            updatedMap[i][column],
+            updatedMap[i - 1][column],
+          ];
+          i = 0;
+        } else if (
+          i > 0 &&
+          getCellValue(updatedMap[i][column], updatedCellProps) ===
+            getCellValue(updatedMap[i - 1][column], updatedCellProps)
+        ) {
+          updatedCellProps.forEach((cellProp, index) => {
+            if (updatedMap[i - 1][column] === cellProp.k) {
+              updatedCellProps[index] = {
+                k: cellProp.k,
+                v:
+                  getCellValue(updatedMap[i - 1][column], updatedCellProps) * 2,
+              };
+            } else if (updatedMap[i][column] === cellProp.k) {
+              updatedCellProps[index] = { k: cellProp.k, v: 0 };
+            }
+          });
         }
       }
     }
-    return updatedMap;
+    return { map: updatedMap, props: updatedCellProps };
+  },
+
+  bottom(cellMap, cellProps) {
+    const updatedMap = cellMap.slice();
+    const updatedCellProps = cellProps.slice();
+    for (let column = 0; column < updatedMap[0].length; column += 1) {
+      for (let i = updatedMap.length - 1; i >= 0; i -= 1) {
+        if (
+          i + 1 < updatedMap.length &&
+          getCellValue(updatedMap[i][column], updatedCellProps) > 0 &&
+          getCellValue(updatedMap[i + 1][column], updatedCellProps) === 0
+        ) {
+          [updatedMap[i + 1][column], updatedMap[i][column]] = [
+            updatedMap[i][column],
+            updatedMap[i + 1][column],
+          ];
+          i = updatedMap.length - 1;
+        } else if (
+          i + 1 < updatedMap.length &&
+          getCellValue(updatedMap[i][column], updatedCellProps) ===
+            getCellValue(updatedMap[i + 1][column], updatedCellProps)
+        ) {
+          updatedCellProps.forEach((cellProp, index) => {
+            if (updatedMap[i + 1][column] === cellProp.k) {
+              updatedCellProps[index] = {
+                k: cellProp.k,
+                v:
+                  getCellValue(updatedMap[i + 1][column], updatedCellProps) * 2,
+              };
+            } else if (updatedMap[i][column] === cellProp.k) {
+              updatedCellProps[index] = { k: cellProp.k, v: 0 };
+            }
+          });
+        }
+      }
+    }
+    return { map: updatedMap, props: updatedCellProps };
   },
 };
 
