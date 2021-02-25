@@ -33,8 +33,26 @@ class Game extends React.Component {
         [13, 14, 15, 16],
       ],
     };
+    this.globalClickHandler = this.globalClickHandler.bind(this);
     this.horizontalShift = this.horizontalShift.bind(this);
     this.verticalShift = this.verticalShift.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.globalClickHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.globalClickHandler);
+  }
+
+  globalClickHandler(e) {
+    const { cellProps, cellMap } = this.state;
+    if (e.key === 'ArrowUp') this.verticalShift(cellMap, cellProps, 'top');
+    if (e.key === 'ArrowDown') this.verticalShift(cellMap, cellProps, 'bottom');
+    if (e.key === 'ArrowRight')
+      this.horizontalShift(cellMap, cellProps, 'right');
+    if (e.key === 'ArrowLeft') this.horizontalShift(cellMap, cellProps, 'left');
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
@@ -67,30 +85,6 @@ class Game extends React.Component {
       <div className="game">
         <GameHeader score={0} bestScore={1024} changeAppMode={changeAppMode} />
         <GameBoard cellProps={cellProps} cellMap={cellMap} />
-        <button
-          type="button"
-          onClick={() => this.horizontalShift(cellMap, cellProps, 'left')}
-        >
-          LEFT
-        </button>
-        <button
-          type="button"
-          onClick={() => this.horizontalShift(cellMap, cellProps, 'right')}
-        >
-          RIGHT
-        </button>
-        <button
-          type="button"
-          onClick={() => this.verticalShift(cellMap, cellProps, 'top')}
-        >
-          TOP
-        </button>
-        <button
-          type="button"
-          onClick={() => this.verticalShift(cellMap, cellProps, 'bottom')}
-        >
-          BOTTOM
-        </button>
       </div>
     );
   }
