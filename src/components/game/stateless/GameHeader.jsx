@@ -5,7 +5,12 @@ import GameTips from './GameTips';
 import GameStats from './GameStats';
 import GameBtns from './GameBtns';
 
-export default function GameHeader({ score, bestScore, changeAppMode }) {
+export default function GameHeader({
+  score,
+  bestScore,
+  changeAppMode,
+  startNewGame,
+}) {
   return (
     <div className="game__header">
       <div className="game__header--left-column">
@@ -14,7 +19,7 @@ export default function GameHeader({ score, bestScore, changeAppMode }) {
       </div>
       <div className="game__header--right-column">
         <GameStats score={score} bestScore={bestScore} />
-        <GameBtns changeAppMode={changeAppMode} />
+        <GameBtns changeAppMode={changeAppMode} startNewGame={startNewGame} />
       </div>
     </div>
   );
@@ -24,4 +29,5 @@ GameHeader.propTypes = {
   score: PropTypes.number.isRequired,
   bestScore: PropTypes.number.isRequired,
   changeAppMode: PropTypes.func.isRequired,
+  startNewGame: PropTypes.func.isRequired,
 };

@@ -4,37 +4,14 @@ import GameBoard from '../stateless/GameBoard';
 import GameHeader from '../stateless/GameHeader';
 import shift from '../util/shift';
 import addRandomCell from '../util/addRandomCell';
+import getGameState from '../util/getGameState';
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cellProps: [
-        { k: 1, v: 2 },
-        { k: 2, v: 2 },
-        { k: 3, v: 0 },
-        { k: 4, v: 0 },
-        { k: 5, v: 2 },
-        { k: 6, v: 2 },
-        { k: 7, v: 0 },
-        { k: 8, v: 0 },
-        { k: 9, v: 0 },
-        { k: 10, v: 0 },
-        { k: 11, v: 0 },
-        { k: 12, v: 0 },
-        { k: 13, v: 0 },
-        { k: 14, v: 0 },
-        { k: 15, v: 0 },
-        { k: 16, v: 0 },
-      ],
-      cellMap: [
-        [1, 2, 3, 4],
-        [5, 6, 7, 8],
-        [9, 10, 11, 12],
-        [13, 14, 15, 16],
-      ],
-    };
+    this.state = getGameState();
     this.globalClickHandler = this.globalClickHandler.bind(this);
+    this.startNewGame = this.startNewGame.bind(this);
     this.horizontalShift = this.horizontalShift.bind(this);
     this.verticalShift = this.verticalShift.bind(this);
   }
@@ -72,6 +49,10 @@ class Game extends React.Component {
     }, 75);
   }
 
+  startNewGame() {
+    this.setState(getGameState());
+  }
+
   horizontalShift(cellMap, cellProps, destinition) {
     const { map, props, shifted } =
       destinition === 'left'
@@ -102,7 +83,12 @@ class Game extends React.Component {
 
     return (
       <div className="game">
-        <GameHeader score={0} bestScore={1024} changeAppMode={changeAppMode} />
+        <GameHeader
+          score={0}
+          bestScore={1024}
+          changeAppMode={changeAppMode}
+          startNewGame={this.startNewGame}
+        />
         <GameBoard cellProps={cellProps} cellMap={cellMap} />
       </div>
     );

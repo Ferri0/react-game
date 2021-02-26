@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function GameStats({ changeAppMode }) {
+export default function GameBtns({ changeAppMode, startNewGame }) {
   return (
     <div className="game__header--btns">
-      <div className="game__header--btns--btn">New Game</div>
+      <button
+        className="game__header--btns--btn"
+        onClick={startNewGame}
+        type="button"
+      >
+        New Game
+      </button>
       <button
         className="game__header--btns--btn"
         onClick={() => changeAppMode('inMenu')}
@@ -16,6 +22,7 @@ export default function GameStats({ changeAppMode }) {
   );
 }
 
-GameStats.propTypes = {
+GameBtns.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
+  startNewGame: PropTypes.func.isRequired,
 };
