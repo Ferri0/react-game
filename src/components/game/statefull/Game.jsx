@@ -10,7 +10,7 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     const { cellProps, cellMap } = getGameState();
-    this.state = { cellProps, cellMap, gameScore: 0 };
+    this.state = { cellProps, cellMap, gameScore: 0, shiftScore: 0 };
     this.globalClickHandler = this.globalClickHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
     this.saveGameState = this.saveGameState.bind(this);
@@ -75,6 +75,7 @@ class Game extends React.Component {
       cellMap: map,
       cellProps: props,
       gameScore: gameScore + shiftScore,
+      shiftScore,
     });
     return isShifted;
   }
@@ -89,18 +90,20 @@ class Game extends React.Component {
       cellMap: map,
       cellProps: props,
       gameScore: gameScore + shiftScore,
+      shiftScore,
     });
     return shifted;
   }
 
   render() {
-    const { cellProps, cellMap, gameScore } = this.state;
+    const { cellProps, cellMap, gameScore, shiftScore } = this.state;
     const { changeAppMode } = this.props;
 
     return (
       <div className="game">
         <GameHeader
           score={gameScore}
+          shiftScore={shiftScore}
           bestScore={1024}
           changeAppMode={changeAppMode}
           startNewGame={this.startNewGame}

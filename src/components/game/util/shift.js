@@ -126,7 +126,6 @@ const shift = {
             if (updatedMap[i - 1][column] === cellProp.k) {
               const updatedValue =
                 getCellValue(updatedMap[i - 1][column], updatedCellProps) * 2;
-              console.log(updatedValue);
               this.shiftScore += updatedValue;
               updatedCellProps[index] = {
                 k: cellProp.k,

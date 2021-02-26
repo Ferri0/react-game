@@ -10,6 +10,7 @@ export default function GameHeader({
   bestScore,
   changeAppMode,
   startNewGame,
+  shiftScore,
 }) {
   return (
     <div className="game__header">
@@ -18,7 +19,11 @@ export default function GameHeader({
         <GameTips />
       </div>
       <div className="game__header--right-column">
-        <GameStats score={score} bestScore={bestScore} />
+        <GameStats
+          score={score}
+          bestScore={bestScore}
+          shiftScore={shiftScore}
+        />
         <GameBtns changeAppMode={changeAppMode} startNewGame={startNewGame} />
       </div>
     </div>
@@ -30,4 +35,5 @@ GameHeader.propTypes = {
   bestScore: PropTypes.number.isRequired,
   changeAppMode: PropTypes.func.isRequired,
   startNewGame: PropTypes.func.isRequired,
+  shiftScore: PropTypes.number.isRequired,
 };

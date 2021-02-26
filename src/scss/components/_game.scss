@@ -2,6 +2,7 @@
   width: 30rem;
   height: 15rem;
   @include flex(row, space-between, flex-start);
+
   &--left-column {
     width: 50%;
   }
@@ -32,7 +33,31 @@
   }
 
   &--stats {
+    position: relative;
     display: flex;
+    @keyframes fade-top {
+      from {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-5rem);
+        opacity: 0;
+      }
+    }
+
+    &--shift-score {
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      z-index: 10;
+      color: #796e65;
+      font-weight: 700;
+      font-size: 2rem;
+      animation: fade-top;
+      animation-duration: 0.8s;
+      animation-fill-mode: forwards;
+    }
     &--cell {
       position: relative;
       width: 8rem;
@@ -54,7 +79,7 @@
         content: 'SCORE';
       }
 
-      &:nth-child(2n) {
+      &:last-child {
         margin-right: 0;
 
         &::before {
