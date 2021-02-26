@@ -5,6 +5,7 @@ export default function getGameState() {
   const numOfRows = numOfCells / 4;
   let cellProps = [];
   const cellMap = [];
+  const gameScore = 0;
 
   for (let row = 0; row < numOfRows; row += 1) {
     cellMap.push([]);
@@ -19,5 +20,5 @@ export default function getGameState() {
 
   cellProps = addRandomCell(cellProps);
   cellProps = addRandomCell(cellProps);
-  return { cellProps, cellMap };
+  return { cellProps, cellMap, gameScore };
 }

@@ -9,7 +9,8 @@ import getGameState from '../util/getGameState';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = getGameState();
+    const { cellProps, cellMap } = getGameState();
+    this.state = { cellProps, cellMap, gameScore: 0 };
     this.globalClickHandler = this.globalClickHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
     this.saveGameState = this.saveGameState.bind(this);
@@ -65,37 +66,41 @@ class Game extends React.Component {
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
-    const { map, props, shifted } =
+    const { map, props, isShifted, shiftScore } =
       destinition === 'left'
         ? shift.left(cellMap, cellProps)
         : shift.right(cellMap, cellProps);
+    const { gameScore } = this.state;
     this.setState({
       cellMap: map,
       cellProps: props,
+      gameScore: gameScore + shiftScore,
     });
-    return shifted;
+    return isShifted;
   }
 
   verticalShift(cellMap, cellProps, destinition) {
-    const { map, props, shifted } =
+    const { map, props, shifted, shiftScore } =
       destinition === 'top'
         ? shift.top(cellMap, cellProps)
         : shift.bottom(cellMap, cellProps);
+    const { gameScore } = this.state;
     this.setState({
       cellMap: map,
       cellProps: props,
+      gameScore: gameScore + shiftScore,
     });
     return shifted;
   }
 
   render() {
-    const { cellProps, cellMap } = this.state;
+    const { cellProps, cellMap, gameScore } = this.state;
     const { changeAppMode } = this.props;
 
     return (
       <div className="game">
         <GameHeader
-          score={0}
+          score={gameScore}
           bestScore={1024}
           changeAppMode={changeAppMode}
           startNewGame={this.startNewGame}
