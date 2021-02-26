@@ -12,16 +12,22 @@ class Game extends React.Component {
     this.state = getGameState();
     this.globalClickHandler = this.globalClickHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
+    this.saveGameState = this.saveGameState.bind(this);
     this.horizontalShift = this.horizontalShift.bind(this);
     this.verticalShift = this.verticalShift.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('keydown', this.globalClickHandler);
+    const storedGameState = JSON.parse(localStorage.getItem('gameState'));
+    if (storedGameState) {
+      this.setState(storedGameState);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.globalClickHandler);
+    this.saveGameState();
   }
 
   globalClickHandler(e) {
@@ -45,12 +51,17 @@ class Game extends React.Component {
       if (isCellShifted) {
         this.setState({ cellProps: addRandomCell(cellPropsUpdated) });
       }
+      this.saveGameState();
       window.addEventListener('keydown', this.globalClickHandler);
     }, 75);
   }
 
-  startNewGame() {
+  async startNewGame() {
     this.setState(getGameState());
+  }
+
+  saveGameState() {
+    localStorage.setItem('gameState', JSON.stringify(this.state));
   }
 
   horizontalShift(cellMap, cellProps, destinition) {

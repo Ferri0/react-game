@@ -24,7 +24,12 @@ class Main extends React.Component {
           <Button
             key={btnName}
             className="menu__button"
-            onClick={() => changeAppMode('inGame')}
+            onClick={() => {
+              if (btnName.toLowerCase() === 'new game') {
+                localStorage.setItem('gameState', null);
+              }
+              changeAppMode('inGame');
+            }}
             innerText={btnName}
           />
         );
