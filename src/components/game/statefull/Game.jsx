@@ -5,6 +5,8 @@ import GameHeader from '../stateless/GameHeader';
 import shift from '../util/shift';
 import addRandomCell from '../util/addRandomCell';
 import getGameState from '../util/getGameState';
+import checkWinCondition from '../util/checkWinCondition';
+import checkLoseCondition from '../util/checkLoseCondition';
 
 class Game extends React.Component {
   constructor(props) {
@@ -13,9 +15,6 @@ class Game extends React.Component {
     this.state = { cellProps, cellMap, gameScore: 0, shiftScore: 0 };
     this.globalClickHandler = this.globalClickHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
-    this.saveGameState = this.saveGameState.bind(this);
-    this.horizontalShift = this.horizontalShift.bind(this);
-    this.verticalShift = this.verticalShift.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +22,14 @@ class Game extends React.Component {
     const storedGameState = JSON.parse(localStorage.getItem('gameState'));
     if (storedGameState) {
       this.setState(storedGameState);
+    }
+  }
+
+  componentDidUpdate() {
+    if (checkWinCondition(128, this.state)) {
+      console.log('WON');
+    } else if (checkLoseCondition(this.state)) {
+      console.log('LOST');
     }
   }
 
@@ -66,7 +73,7 @@ class Game extends React.Component {
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
-    const { map, props, isShifted, shiftScore } =
+    const { map, props, shifted, shiftScore } =
       destinition === 'left'
         ? shift.left(cellMap, cellProps)
         : shift.right(cellMap, cellProps);
@@ -77,7 +84,7 @@ class Game extends React.Component {
       gameScore: gameScore + shiftScore,
       shiftScore,
     });
-    return isShifted;
+    return shifted;
   }
 
   verticalShift(cellMap, cellProps, destinition) {

@@ -45,7 +45,7 @@ const shift = {
     return {
       map: updatedMap,
       props: updatedCellProps,
-      isShifted: this.isCellShifted,
+      shifted: this.isCellShifted,
       shiftScore: this.shiftScore,
     };
   },
@@ -92,7 +92,7 @@ const shift = {
     return {
       map: updatedMap,
       props: updatedCellProps,
-      isShifted: this.isCellShifted,
+      shifted: this.isCellShifted,
       shiftScore: this.shiftScore,
     };
   },
