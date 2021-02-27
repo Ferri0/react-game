@@ -20,5 +20,9 @@ export default function getGameState() {
 
   cellProps = addRandomCell(cellProps);
   cellProps = addRandomCell(cellProps);
-  return { cellProps, cellMap, gameScore };
+
+  const isGameOver = false;
+  const isPlayerWon = false;
+
+  return { cellProps, cellMap, gameScore, isGameOver, isPlayerWon };
 }

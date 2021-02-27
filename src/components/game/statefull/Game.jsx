@@ -12,30 +12,56 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     const { cellProps, cellMap } = getGameState();
-    this.state = { cellProps, cellMap, gameScore: 0, shiftScore: 0 };
+    this.state = {
+      cellProps,
+      cellMap,
+      gameScore: 0,
+      shiftScore: 0,
+      isGameOver: false,
+      isPlayerWon: false,
+    };
     this.globalClickHandler = this.globalClickHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.globalClickHandler);
     const storedGameState = JSON.parse(localStorage.getItem('gameState'));
     if (storedGameState) {
       this.setState(storedGameState);
     }
+    window.addEventListener('keydown', this.globalClickHandler);
+    setTimeout(() => {
+      const { isGameOver, isPlayerWon } = this.state;
+      if (isGameOver || isPlayerWon) {
+        window.removeEventListener('keydown', this.globalClickHandler);
+      }
+    }, 100);
   }
 
   componentDidUpdate() {
-    if (checkWinCondition(128, this.state)) {
-      console.log('WON');
-    } else if (checkLoseCondition(this.state)) {
-      console.log('LOST');
+    const { isGameOver, isPlayerWon } = this.state;
+    if (!isGameOver) {
+      if (checkWinCondition(2048, this.state) && !isPlayerWon) {
+        this.playerWin();
+        window.removeEventListener('keydown', this.globalClickHandler);
+      } else if (checkLoseCondition(this.state)) {
+        this.gameOver();
+        window.removeEventListener('keydown', this.globalClickHandler);
+      }
     }
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.globalClickHandler);
     this.saveGameState();
+  }
+
+  gameOver() {
+    this.setState({ isGameOver: true });
+  }
+
+  playerWin() {
+    this.setState({ isPlayerWon: true });
   }
 
   globalClickHandler(e) {
@@ -60,12 +86,16 @@ class Game extends React.Component {
         this.setState({ cellProps: addRandomCell(cellPropsUpdated) });
       }
       this.saveGameState();
-      window.addEventListener('keydown', this.globalClickHandler);
+      const { isGameOver, isPlayerWon } = this.state;
+      if (!isGameOver && !isPlayerWon) {
+        window.addEventListener('keydown', this.globalClickHandler);
+      }
     }, 75);
   }
 
-  async startNewGame() {
+  startNewGame() {
     this.setState(getGameState());
+    window.addEventListener('keydown', this.globalClickHandler);
   }
 
   saveGameState() {
@@ -103,19 +133,38 @@ class Game extends React.Component {
   }
 
   render() {
-    const { cellProps, cellMap, gameScore, shiftScore } = this.state;
-    const { changeAppMode } = this.props;
+    const {
+      cellProps,
+      cellMap,
+      gameScore,
+      shiftScore,
+      isGameOver,
+      isPlayerWon,
+    } = this.state;
+    const { changeAppMode, topScore } = this.props;
+    let actualTopScore = 0;
+    if (gameScore > topScore) {
+      actualTopScore = gameScore;
+    } else {
+      actualTopScore = topScore;
+    }
 
     return (
       <div className="game">
         <GameHeader
           score={gameScore}
           shiftScore={shiftScore}
-          bestScore={1024}
+          bestScore={actualTopScore}
           changeAppMode={changeAppMode}
           startNewGame={this.startNewGame}
         />
-        <GameBoard cellProps={cellProps} cellMap={cellMap} />
+        <GameBoard
+          cellProps={cellProps}
+          cellMap={cellMap}
+          isGameOver={isGameOver}
+          isPlayerWon={isPlayerWon}
+          startNewGame={this.startNewGame}
+        />
       </div>
     );
   }
@@ -123,6 +172,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
+  topScore: PropTypes.number.isRequired,
 };
 
 export default Game;

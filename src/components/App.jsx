@@ -5,7 +5,7 @@ import Game from './game/statefull/Game';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { mode: 'inMenu' };
+    this.state = { mode: 'inMenu', rate: [0, 0, 0] };
     this.changeAppMode = this.changeAppMode.bind(this);
   }
 
@@ -14,11 +14,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode, rate } = this.state;
     if (mode === 'inMenu') {
-      return <Menu changeAppMode={this.changeAppMode} />;
+      return <Menu changeAppMode={this.changeAppMode} rate={rate} />;
     }
-    return <Game changeAppMode={this.changeAppMode} />;
+    return <Game changeAppMode={this.changeAppMode} topScore={rate[0]} />;
   }
 }
 
