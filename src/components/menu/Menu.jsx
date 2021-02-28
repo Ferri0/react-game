@@ -25,7 +25,7 @@ class Menu extends React.Component {
 
   render() {
     const { menuPage } = this.state;
-    const { changeAppMode } = this.props;
+    const { changeAppMode, rate } = this.props;
     if (menuPage === 'main') {
       return (
         <Main setMenuPage={this.setMenuPage} changeAppMode={changeAppMode} />
@@ -38,7 +38,7 @@ class Menu extends React.Component {
       return <Settings returnToMain={this.returnToMain} />;
     }
     if (menuPage === 'rate') {
-      return <Rate returnToMain={this.returnToMain} />;
+      return <Rate returnToMain={this.returnToMain} rate={rate} />;
     }
     if (menuPage === 'tutorial') {
       return <Tutorial returnToMain={this.returnToMain} />;
@@ -49,6 +49,7 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
+  rate: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Menu;

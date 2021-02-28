@@ -1,7 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function GameModal({ isGameOver, isPlayerWon, startNewGame }) {
+export default function GameModal({
+  isGameOver,
+  isPlayerWon,
+  startNewGame,
+  handleScore,
+  score,
+}) {
+  const handleClick = function handler(newScore) {
+    handleScore(newScore);
+    startNewGame();
+  };
   if (isGameOver) {
     return (
       <div className="game__modal">
@@ -9,7 +19,7 @@ export default function GameModal({ isGameOver, isPlayerWon, startNewGame }) {
         <button
           className="game__modal--btn"
           type="button"
-          onClick={startNewGame}
+          onClick={() => handleClick(score)}
         >
           Try Again
         </button>
@@ -37,4 +47,6 @@ GameModal.propTypes = {
   isGameOver: PropTypes.bool.isRequired,
   isPlayerWon: PropTypes.bool.isRequired,
   startNewGame: PropTypes.func.isRequired,
+  handleScore: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
 };

@@ -29,14 +29,18 @@ class GameBoard extends React.Component {
       isGameOver,
       isPlayerWon,
       startNewGame,
+      handleScore,
+      score,
     } = this.props;
 
     return (
       <div className="game__board--wrapper">
         <GameModal
+          score={score}
           isGameOver={isGameOver}
           isPlayerWon={isPlayerWon}
           startNewGame={startNewGame}
+          handleScore={handleScore}
         />
         <div className="game__board--inner">
           <ActiveCellsSet cellProps={cellProps} cellMap={cellMap} />
@@ -60,6 +64,8 @@ GameBoard.propTypes = {
   isGameOver: PropTypes.bool.isRequired,
   isPlayerWon: PropTypes.bool.isRequired,
   startNewGame: PropTypes.func.isRequired,
+  handleScore: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 export default GameBoard;

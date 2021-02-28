@@ -94,6 +94,8 @@ class Game extends React.Component {
   }
 
   startNewGame() {
+    const { loadSavedScore } = this.props;
+    loadSavedScore();
     this.setState(getGameState());
     window.addEventListener('keydown', this.globalClickHandler);
   }
@@ -141,7 +143,7 @@ class Game extends React.Component {
       isGameOver,
       isPlayerWon,
     } = this.state;
-    const { changeAppMode, topScore } = this.props;
+    const { changeAppMode, topScore, handleScore } = this.props;
     let actualTopScore = 0;
     if (gameScore > topScore) {
       actualTopScore = gameScore;
@@ -159,11 +161,13 @@ class Game extends React.Component {
           startNewGame={this.startNewGame}
         />
         <GameBoard
+          score={gameScore}
           cellProps={cellProps}
           cellMap={cellMap}
           isGameOver={isGameOver}
           isPlayerWon={isPlayerWon}
           startNewGame={this.startNewGame}
+          handleScore={handleScore}
         />
       </div>
     );
@@ -173,6 +177,8 @@ class Game extends React.Component {
 Game.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
   topScore: PropTypes.number.isRequired,
+  handleScore: PropTypes.func.isRequired,
+  loadSavedScore: PropTypes.func.isRequired,
 };
 
 export default Game;
