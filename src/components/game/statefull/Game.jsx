@@ -39,12 +39,15 @@ class Game extends React.Component {
   }
 
   componentDidUpdate() {
+    const { sounds } = this.props;
     const { isGameOver, isPlayerWon } = this.state;
     if (!isGameOver) {
-      if (checkWinCondition(2048, this.state) && !isPlayerWon) {
+      if (checkWinCondition(128, this.state) && !isPlayerWon) {
+        sounds.winGame.play();
         this.playerWin();
         window.removeEventListener('keydown', this.globalClickHandler);
       } else if (checkLoseCondition(this.state)) {
+        sounds.loseGame.play();
         this.gameOver();
         window.removeEventListener('keydown', this.globalClickHandler);
       }
@@ -94,7 +97,9 @@ class Game extends React.Component {
   }
 
   startNewGame() {
-    const { loadSavedScore } = this.props;
+    const { loadSavedScore, sounds } = this.props;
+    sounds.newGame.currentTime = 0;
+    sounds.newGame.play();
     loadSavedScore();
     this.setState(getGameState());
     window.addEventListener('keydown', this.globalClickHandler);
@@ -105,11 +110,15 @@ class Game extends React.Component {
   }
 
   horizontalShift(cellMap, cellProps, destinition) {
+    const { sounds } = this.props;
     const { map, props, shifted, shiftScore } =
       destinition === 'left'
         ? shift.left(cellMap, cellProps)
         : shift.right(cellMap, cellProps);
     const { gameScore } = this.state;
+    if (shifted) {
+      sounds.shiftSound.play();
+    }
     this.setState({
       cellMap: map,
       cellProps: props,
@@ -120,11 +129,15 @@ class Game extends React.Component {
   }
 
   verticalShift(cellMap, cellProps, destinition) {
+    const { sounds } = this.props;
     const { map, props, shifted, shiftScore } =
       destinition === 'top'
         ? shift.top(cellMap, cellProps)
         : shift.bottom(cellMap, cellProps);
     const { gameScore } = this.state;
+    if (shifted) {
+      sounds.shiftSound.play();
+    }
     this.setState({
       cellMap: map,
       cellProps: props,
@@ -143,7 +156,7 @@ class Game extends React.Component {
       isGameOver,
       isPlayerWon,
     } = this.state;
-    const { changeAppMode, topScore, handleScore } = this.props;
+    const { changeAppMode, topScore, handleScore, sounds } = this.props;
     let actualTopScore = 0;
     if (gameScore > topScore) {
       actualTopScore = gameScore;
@@ -154,6 +167,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <GameHeader
+          sounds={sounds}
           score={gameScore}
           shiftScore={shiftScore}
           bestScore={actualTopScore}
@@ -179,6 +193,16 @@ Game.propTypes = {
   topScore: PropTypes.number.isRequired,
   handleScore: PropTypes.func.isRequired,
   loadSavedScore: PropTypes.func.isRequired,
+  sounds: PropTypes.shape({
+    shiftSound: PropTypes.instanceOf(Audio),
+    menuSound: PropTypes.instanceOf(Audio).isRequired,
+    bgSound: PropTypes.instanceOf(Audio).isRequired,
+    loseGame: PropTypes.instanceOf(Audio).isRequired,
+    winGame: PropTypes.instanceOf(Audio).isRequired,
+    newGame: PropTypes.instanceOf(Audio).isRequired,
+    setVolume: PropTypes.func.isRequired,
+    init: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Game;

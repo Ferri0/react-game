@@ -16,10 +16,16 @@ class Menu extends React.Component {
 
   // @value is name of button
   setMenuPage(value) {
+    const { sounds } = this.props;
+    sounds.menuSound.currentTime = 0;
+    sounds.menuSound.play();
     this.setState({ menuPage: value });
   }
 
   returnToMain() {
+    const { sounds } = this.props;
+    sounds.menuSound.currentTime = 0;
+    sounds.menuSound.play();
     this.setState({ menuPage: 'main' });
   }
 
@@ -50,6 +56,16 @@ class Menu extends React.Component {
 Menu.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
   rate: PropTypes.arrayOf(PropTypes.number).isRequired,
+  sounds: PropTypes.shape({
+    shiftSound: PropTypes.instanceOf(Audio),
+    menuSound: PropTypes.instanceOf(Audio).isRequired,
+    bgSound: PropTypes.instanceOf(Audio).isRequired,
+    loseGame: PropTypes.instanceOf(Audio).isRequired,
+    winGame: PropTypes.instanceOf(Audio).isRequired,
+    newGame: PropTypes.instanceOf(Audio).isRequired,
+    setVolume: PropTypes.func.isRequired,
+    init: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Menu;
