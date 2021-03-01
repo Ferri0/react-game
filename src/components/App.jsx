@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Menu from './menu/Menu';
 import Game from './game/statefull/Game';
+import InfoBlock from './InfoBlock';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,16 +47,24 @@ class App extends React.Component {
   render() {
     const { mode, rate } = this.state;
     if (mode === 'inMenu') {
-      return <Menu changeAppMode={this.changeAppMode} rate={rate} />;
+      return (
+        <>
+          <Menu changeAppMode={this.changeAppMode} rate={rate} />
+          <InfoBlock />
+        </>
+      );
     }
     const topRate = rate[0] !== undefined ? rate[0] : 0;
     return (
-      <Game
-        loadSavedScore={this.loadSavedScore}
-        changeAppMode={this.changeAppMode}
-        topScore={topRate}
-        handleScore={this.handleScore}
-      />
+      <>
+        <Game
+          loadSavedScore={this.loadSavedScore}
+          changeAppMode={this.changeAppMode}
+          topScore={topRate}
+          handleScore={this.handleScore}
+        />
+        <InfoBlock />
+      </>
     );
   }
 }
