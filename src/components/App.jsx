@@ -3,19 +3,72 @@ import React, { Fragment } from 'react';
 import Menu from './menu/Menu';
 import Game from './game/statefull/Game';
 import InfoBlock from './InfoBlock';
+import SoundModal from './soundModal/SoundModal';
 import soundsObj from './audio/sounds';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { mode: 'inMenu', rate: [], sounds: soundsObj.init() };
+    this.state = {
+      mode: 'inMenu',
+      rate: [],
+      settings: {
+        music: false,
+        sounds: true,
+        volume: 1,
+        difficulty: 2048,
+        board: 16,
+        theme: 'light',
+      },
+      sounds: soundsObj.init(),
+      musicConfirmed: false,
+    };
     this.changeAppMode = this.changeAppMode.bind(this);
+    this.handleSettingsChange = this.handleSettingsChange.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.loadSavedScore = this.loadSavedScore.bind(this);
+    this.loadSavedSettings = this.loadSavedSettings.bind(this);
+    this.confirmMusic = this.confirmMusic.bind(this);
   }
 
   componentDidMount() {
     this.loadSavedScore();
+    this.loadSavedSettings();
+  }
+
+  componentDidUpdate(prevState) {
+    const { settings, sounds } = this.state;
+    if (!settings.music) {
+      document.getElementById('bgSound').pause();
+    }
+    if (prevState?.settings?.volume !== settings.volume) {
+      const volume = settings.volume / 10;
+      sounds.setVolume(volume);
+    }
+    this.saveSettingsState();
+  }
+
+  handleSettingsChange(setting, value) {
+    const { sounds, settings: currentSettings } = this.state;
+
+    if (currentSettings.sounds) {
+      sounds.settingsSound.currentTime = 0;
+      sounds.settingsSound.play();
+    }
+
+    this.setState((prevState) => {
+      const settings = { ...prevState.settings };
+      settings[setting] = value;
+      return { settings };
+    });
+
+    if (value >= 9) localStorage.setItem('gameState', null);
+
+    if (value === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else if (value === 'light') {
+      document.body.classList.remove('dark-theme');
+    }
   }
 
   handleScore(score) {
@@ -30,10 +83,24 @@ class App extends React.Component {
     this.saveRateState();
   }
 
+  confirmMusic() {
+    this.setState({
+      musicConfirmed: true,
+    });
+    document.getElementById('bgSound').play();
+  }
+
   loadSavedScore() {
     const storedRate = JSON.parse(localStorage.getItem('gameRate'));
     if (storedRate) {
       this.setState({ rate: storedRate });
+    }
+  }
+
+  loadSavedSettings() {
+    const storedSettings = JSON.parse(localStorage.getItem('settings'));
+    if (storedSettings) {
+      this.setState({ settings: storedSettings });
     }
   }
 
@@ -42,15 +109,22 @@ class App extends React.Component {
     localStorage.setItem('gameRate', JSON.stringify(rate));
   }
 
+  saveSettingsState() {
+    const { settings } = this.state;
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }
+
   changeAppMode(value) {
-    const { sounds } = this.state;
-    sounds.menuSound.currentTime = 0;
-    sounds.menuSound.play();
+    const { sounds, settings } = this.state;
+    if (settings.sounds) {
+      sounds.menuSound.currentTime = 0;
+      sounds.menuSound.play();
+    }
     this.setState({ mode: value });
   }
 
   render() {
-    const { mode, rate, sounds } = this.state;
+    const { mode, rate, sounds, settings, musicConfirmed } = this.state;
     if (mode === 'inMenu') {
       return (
         <>
@@ -58,8 +132,18 @@ class App extends React.Component {
             changeAppMode={this.changeAppMode}
             rate={rate}
             sounds={sounds}
+            settings={settings}
+            confirmMusic={this.confirmMusic}
+            handleSettingsChange={this.handleSettingsChange}
           />
+          {SoundModal(settings.music, musicConfirmed, this.confirmMusic)}
           <InfoBlock />
+          <audio
+            id="bgSound"
+            key="bgSound"
+            loop
+            src="/assets/audio/menu-bg.wav"
+          />
         </>
       );
     }
@@ -72,8 +156,15 @@ class App extends React.Component {
           topScore={topRate}
           handleScore={this.handleScore}
           sounds={sounds}
+          settings={settings}
         />
         <InfoBlock />
+        <audio
+          id="bgSound"
+          key="bgSound"
+          loop
+          src="/assets/audio/menu-bg.wav"
+        />
       </>
     );
   }

@@ -31,6 +31,7 @@ class GameBoard extends React.Component {
       startNewGame,
       handleScore,
       score,
+      settings,
     } = this.props;
 
     return (
@@ -42,9 +43,13 @@ class GameBoard extends React.Component {
           startNewGame={startNewGame}
           handleScore={handleScore}
         />
-        <div className="game__board--inner">
-          <ActiveCellsSet cellProps={cellProps} cellMap={cellMap} />
-          <StaticCellsSet numOfCells={16} />
+        <div className={`game__board--inner game__board--${settings.board}`}>
+          <ActiveCellsSet
+            cellProps={cellProps}
+            cellMap={cellMap}
+            gameBoard={settings.board}
+          />
+          <StaticCellsSet numOfCells={settings.board} />
         </div>
       </div>
     );
@@ -66,6 +71,14 @@ GameBoard.propTypes = {
   startNewGame: PropTypes.func.isRequired,
   handleScore: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
+  settings: PropTypes.shape({
+    music: PropTypes.bool.isRequired,
+    sounds: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
+    difficulty: PropTypes.number.isRequired,
+    board: PropTypes.number.isRequired,
+    theme: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default GameBoard;

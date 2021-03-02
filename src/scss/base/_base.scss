@@ -28,3 +28,6 @@ html {
     padding: 1rem;
   }
 }
+.dark-theme {
+  filter: invert(1) brightness(1) hue-rotate(215deg);
+}

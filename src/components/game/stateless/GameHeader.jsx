@@ -11,12 +11,13 @@ export default function GameHeader({
   changeAppMode,
   startNewGame,
   shiftScore,
+  settings,
 }) {
   return (
     <div className="game__header">
       <div className="game__header--left-column">
-        <GameTitle />
-        <GameTips />
+        <GameTitle winValue={settings.difficulty} />
+        <GameTips winValue={settings.difficulty} />
       </div>
       <div className="game__header--right-column">
         <GameStats
@@ -36,4 +37,12 @@ GameHeader.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
   startNewGame: PropTypes.func.isRequired,
   shiftScore: PropTypes.number.isRequired,
+  settings: PropTypes.shape({
+    music: PropTypes.bool.isRequired,
+    sounds: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
+    difficulty: PropTypes.number.isRequired,
+    board: PropTypes.number.isRequired,
+    theme: PropTypes.string.isRequired,
+  }).isRequired,
 };

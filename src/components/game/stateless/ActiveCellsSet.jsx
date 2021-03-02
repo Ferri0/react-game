@@ -4,9 +4,12 @@ import Cell from './Cell';
 import getRemValue from '../util/getRemValue';
 import getCellCords from '../util/getCellCords';
 
-export default function ActiveCellsSet({ cellProps, cellMap }) {
+export default function ActiveCellsSet({ cellProps, cellMap, gameBoard }) {
   const cellElemsArray = [];
-  const cellSide = getRemValue() * 7.2;
+  let cellSide = null;
+  if (+gameBoard === 9) cellSide = getRemValue() * 9.6;
+  else if (+gameBoard === 16) cellSide = getRemValue() * 7.2;
+  else cellSide = getRemValue() * 5.75;
   cellProps.forEach((props) => {
     const cellCords = getCellCords(props.k, cellMap);
     const cellStyle = {

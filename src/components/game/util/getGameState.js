@@ -1,8 +1,8 @@
 import addRandomCell from './addRandomCell';
 
-export default function getGameState() {
-  const numOfCells = 16;
-  const numOfRows = numOfCells / 4;
+export default function getGameState(boardSize) {
+  const numOfCells = boardSize;
+  const numOfRows = Math.sqrt(numOfCells);
   let cellProps = [];
   const cellMap = [];
   const gameScore = 0;
