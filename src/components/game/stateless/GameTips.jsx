@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 export default function GameTips({ winValue }) {
   return (
-    <div className="game__header--tips">{`Join the tiles, get to ${winValue}!`}</div>
+    <div className="game__header--tips">
+      Join the tiles,
+      <br />
+      {`get to ${winValue}!`}
+    </div>
   );
 }
 
