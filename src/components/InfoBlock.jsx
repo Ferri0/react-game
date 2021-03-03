@@ -24,7 +24,7 @@ export default function InfoBlock() {
               className="info-block__body--img"
               alt="github-icon"
             />
-            Ferri0
+            Ferri0 2021
           </a>
           <a
             href="https://github.com/Ferri0/react-game"

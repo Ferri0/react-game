@@ -6,6 +6,7 @@ import InfoBlock from './InfoBlock';
 import SoundModal from './soundModal/SoundModal';
 import soundsObj from './audio/sounds';
 import mobileAndTabletCheck from './game/util/mobileAndTabletCheck';
+import FullScreenBtn from './FullScreenBtn';
 
 class App extends React.Component {
   constructor(props) {
@@ -54,7 +55,6 @@ class App extends React.Component {
 
   handleSettingsChange(setting, value) {
     const { sounds, settings: currentSettings } = this.state;
-
     if (currentSettings.sounds) {
       sounds.settingsSound.currentTime = 0;
       sounds.settingsSound.play();
@@ -155,6 +155,7 @@ class App extends React.Component {
     if (mode === 'inMenu') {
       return (
         <>
+          <FullScreenBtn />
           <Menu
             setAutoplayMode={this.setAutoplayMode}
             changeAppMode={this.changeAppMode}
@@ -178,6 +179,7 @@ class App extends React.Component {
     const topRate = rate[0] !== undefined ? rate[0] : 0;
     return (
       <>
+        <FullScreenBtn />
         <Game
           setAutoplayMode={this.setAutoplayMode}
           loadSavedScore={this.loadSavedScore}

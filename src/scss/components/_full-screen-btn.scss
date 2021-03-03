@@ -1,0 +1,27 @@
+.full-screen-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  background-position: center;
+  background-size: cover;
+  border: 3px solid #8a7a70;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &--on {
+    background-image: url('../assets/fullScreenOn.svg');
+  }
+
+  &--off {
+    background-image: url('../assets/fullScreenOff.svg');
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
