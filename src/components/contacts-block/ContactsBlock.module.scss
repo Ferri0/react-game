@@ -1,0 +1,93 @@
+@import '../../scss/abstracts.scss';
+
+.ContactsBlock {
+  &_label {
+    display: block;
+    width: 10rem;
+    height: 3rem;
+    color: #faf6f2;
+    font-weight: 700;
+    font-size: 2rem;
+    background-color: #e7853f;
+    border-radius: 10px 10px 0 0;
+    transition: all 0.3s;
+    @include flex(column, center, center);
+
+    &:hover {
+      background-color: $game-title-bg-color;
+      cursor: pointer;
+    }
+  }
+
+  &_input {
+    display: none;
+
+    &:checked + .ContactsBlock_body {
+      left: 7.5rem;
+    }
+  }
+
+  &_body {
+    position: absolute;
+    left: -14.5rem;
+    width: 10rem;
+    height: 25rem;
+    color: #faf6f2;
+    text-orientation: upright;
+    background-color: #89a3eb;
+    border-radius: 10px 10px 0 0;
+    transform: rotate(90deg);
+    transition: all 0.3s ease-in-out;
+    @include flex(column, flex-start, flex-start);
+
+    &__block {
+      width: 10rem;
+      @include flex(row, flex-start, flex-start);
+    }
+
+    &__img {
+      width: 3rem;
+      margin-right: 3.3rem;
+      margin-left: -0.5rem;
+    }
+
+    &__imgRss {
+      width: 5rem;
+      margin-right: 1.2rem;
+      margin-left: 0rem;
+    }
+
+    &__text {
+      position: absolute;
+      bottom: 10rem;
+      width: 20rem;
+      font-size: 2rem;
+      transform: rotate(-90deg);
+      @include flex(row, flex-start, center);
+
+      &:nth-child(1n) {
+        left: -8rem;
+      }
+
+      &:nth-child(2n) {
+        left: -5rem;
+      }
+
+      &:nth-child(3n) {
+        left: -2rem;
+      }
+    }
+
+    & a {
+      color: #faf6f2;
+      font-weight: 700;
+      font-size: 1.9rem;
+      text-decoration: none;
+
+      &:hover {
+        color: $game-title-bg-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

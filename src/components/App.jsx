@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import Menu from './menu/Menu';
 import Game from './game/statefull/Game';
-import InfoBlock from './InfoBlock';
+import ContactsBlock from './contacts-block';
 import SoundModal from './sound-modal';
 import soundsObj from './audio/sounds';
 import mobileAndTabletCheck from './game/util/mobileAndTabletCheck';
@@ -171,7 +171,7 @@ class App extends React.Component {
             handleSettingsChange={this.handleSettingsChange}
           />
           {SoundModal(settings.music, musicConfirmed, this.confirmMusic)}
-          <InfoBlock />
+          <ContactsBlock />
           <audio
             id="bgSound"
             key="bgSound"
@@ -195,7 +195,7 @@ class App extends React.Component {
           settings={settings}
           autoplay={autoplay}
         />
-        <InfoBlock />
+        <ContactsBlock />
         <audio
           id="bgSound"
           key="bgSound"
