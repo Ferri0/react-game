@@ -253,17 +253,58 @@
 }
 
 .value-2 {
-  background-color: #f1e4da;
+  background-color: #eee4da;
 }
 
 .value-4 {
-  background-color: #eecd82;
+  background-color: #eee1c9;
 }
 
 .value-8 {
-  background-color: #eead82;
+  color: #f9f6f2;
+  background-color: #f3b27a;
 }
 
 .value-16 {
-  background-color: #e77350;
+  background-color: #f69664;
+}
+
+.value-32 {
+  color: #f9f6f2;
+  background-color: #f77c5f;
+}
+
+.value-64 {
+  color: #f9f6f2;
+  background-color: #f75f3b;
+}
+
+.value-128 {
+  color: #f9f6f2;
+  background-color: #edd073;
+}
+
+.value-256 {
+  color: #f9f6f2;
+  background-color: #edcc62;
+}
+
+.value-512 {
+  color: #f9f6f2;
+  background-color: #edc950;
+}
+
+.value-1024 {
+  color: #f9f6f2;
+  background-color: #c1eb89;
+}
+
+.value-2048 {
+  color: #f9f6f2;
+  background-color: $game-title-bg-color;
+}
+
+.value-4096 {
+  color: #f9f6f2;
+  background-color: #89a3eb;
 }

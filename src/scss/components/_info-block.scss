@@ -2,10 +2,17 @@
   display: block;
   width: 10rem;
   height: 3rem;
+  color: #faf6f2;
   font-weight: 700;
   font-size: 2rem;
-  background-color: green;
+  background-color: #e7853f;
+  border-radius: 10px 10px 0 0;
   @include flex(column, center, center);
+
+  &:hover {
+    background-color: $game-title-bg-color;
+    cursor: pointer;
+  }
 }
 
 .info-block__input {
@@ -17,11 +24,25 @@
   left: -14.5rem;
   width: 10rem;
   height: 25rem;
+  color: #faf6f2;
   text-orientation: upright;
-  background-color: rgb(144, 128, 233);
+  background-color: #89a3eb;
+  border-radius: 10px 10px 0 0;
   transform: rotate(90deg);
   transition: all 0.3s ease-in-out;
   @include flex(column, flex-start, flex-start);
+
+  & a {
+    color: #faf6f2;
+    font-weight: 700;
+    font-size: 1.9rem;
+    text-decoration: none;
+
+    &:hover {
+      color: $game-title-bg-color;
+      cursor: pointer;
+    }
+  }
 }
 
 .info-block__body--block {
@@ -57,7 +78,7 @@
 
   &-rss {
     width: 5rem;
-    margin-right: 1rem;
+    margin-right: 1.2rem;
     margin-left: 0rem;
   }
 }
