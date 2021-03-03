@@ -152,6 +152,11 @@ class App extends React.Component {
       musicConfirmed,
       autoplay,
     } = this.state;
+    if (settings.theme === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else if (settings.theme === 'light') {
+      document.body.classList.remove('dark-theme');
+    }
     if (mode === 'inMenu') {
       return (
         <>

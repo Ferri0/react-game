@@ -30,6 +30,61 @@ html {
     padding: 1rem;
   }
 }
+
 .dark-theme {
-  filter: invert(1) brightness(1) hue-rotate(215deg);
+  #root {
+    background-color: #322d1e;
+  }
+  .menu {
+    background-color: #936243;
+  }
+  .menu__button {
+    color: #c1b6ac;
+    background-color: #744220;
+  }
+  .full-screen-btn {
+    filter: brightness(1.5);
+  }
+  .menu__title {
+    background-color: #744220;
+  }
+  .menu__settings {
+    color: #c1b6ac;
+    background-color: #744220;
+  }
+  .menu__settings--line {
+    color: #c1b6ac;
+  }
+  .menu__tutorial {
+    color: #c1b6ac;
+    background-color: #744220;
+    & span {
+      color: #c1b6ac;
+    }
+  }
+  .menu__leaderboard {
+    color: #c1b6ac;
+    background-color: #744220;
+  }
+  .menu__leaderboard--score {
+    color: #c1b6ac;
+  }
+  .game__board--wrapper {
+    background-color: #936243;
+  }
+  .game__board--inner {
+    background-color: #936243;
+  }
+  .game__cell--inner {
+    background-color: #a7764c;
+  }
+  .game__header--stats--cell {
+    background-color: #936243;
+  }
+  .game__header--tips {
+    color: #c1b6ac;
+  }
+  .game__header--stats--shift-score {
+    color: #c1b6ac;
+  }
 }
