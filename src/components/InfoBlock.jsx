@@ -17,6 +17,7 @@ export default function InfoBlock() {
           <a
             href="https://github.com/Ferri0"
             className="info-block__body--text"
+            target="_blanc"
           >
             <img
               src="/assets/GitHub-Mark-32px.png"
@@ -28,6 +29,7 @@ export default function InfoBlock() {
           <a
             href="https://github.com/Ferri0/react-game"
             className="info-block__body--text"
+            target="_blanc"
           >
             <img
               src="/assets/GitHub-Mark-32px.png"
@@ -37,8 +39,9 @@ export default function InfoBlock() {
             2048 repository
           </a>
           <a
-            href="https://github.com/Ferri0/react-game"
+            href="https://rs.school/js/"
             className="info-block__body--text"
+            target="_blanc"
           >
             <img
               src="/assets/rs_school_js.svg"
