@@ -53,7 +53,7 @@ class Settings extends React.Component {
           <div className="menu__settings--line">
             <span>Volume</span>
             <input
-              onChange={(e) => handleSettingsChange('volume', e.target.value)}
+              onChange={(e) => handleSettingsChange('volume', +e.target.value)}
               type="range"
               min="0"
               max="1"
@@ -66,7 +66,7 @@ class Settings extends React.Component {
             <select
               defaultValue={settings.difficulty}
               onChange={
-                (e) => handleSettingsChange('difficulty', e.target.value)
+                (e) => handleSettingsChange('difficulty', +e.target.value)
                 // eslint-disable-next-line react/jsx-curly-newline
               }
             >
@@ -79,7 +79,7 @@ class Settings extends React.Component {
             <span>Board size</span>
             <select
               defaultValue={settings.board}
-              onChange={(e) => handleSettingsChange('board', e.target.value)}
+              onChange={(e) => handleSettingsChange('board', +e.target.value)}
             >
               <option value="9">3x3</option>
               <option value="16">4x4</option>

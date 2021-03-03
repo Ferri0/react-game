@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       mode: 'inMenu',
+      autoplay: false,
       rate: [],
       settings: {
         music: false,
@@ -29,6 +30,7 @@ class App extends React.Component {
     this.loadSavedScore = this.loadSavedScore.bind(this);
     this.loadSavedSettings = this.loadSavedSettings.bind(this);
     this.confirmMusic = this.confirmMusic.bind(this);
+    this.setAutoplayMode = this.setAutoplayMode.bind(this);
   }
 
   componentDidMount() {
@@ -83,11 +85,20 @@ class App extends React.Component {
     this.saveRateState();
   }
 
-  confirmMusic() {
-    this.setState({
-      musicConfirmed: true,
-    });
-    document.getElementById('bgSound').play();
+  setAutoplayMode(isEnabled) {
+    const { sounds, settings } = this.state;
+    if (settings.sounds) {
+      sounds.menuSound.currentTime = 0;
+      sounds.menuSound.play();
+    }
+    if (isEnabled) {
+      this.setState({ autoplay: true, mode: 'inGame' });
+    } else {
+      this.setState({ autoplay: false, mode: 'inMenu' });
+      setTimeout(() => {
+        localStorage.setItem('gameState', null);
+      }, 100);
+    }
   }
 
   loadSavedScore() {
@@ -123,12 +134,27 @@ class App extends React.Component {
     this.setState({ mode: value });
   }
 
+  confirmMusic() {
+    this.setState({
+      musicConfirmed: true,
+    });
+    document.getElementById('bgSound').play();
+  }
+
   render() {
-    const { mode, rate, sounds, settings, musicConfirmed } = this.state;
+    const {
+      mode,
+      rate,
+      sounds,
+      settings,
+      musicConfirmed,
+      autoplay,
+    } = this.state;
     if (mode === 'inMenu') {
       return (
         <>
           <Menu
+            setAutoplayMode={this.setAutoplayMode}
             changeAppMode={this.changeAppMode}
             rate={rate}
             sounds={sounds}
@@ -151,12 +177,14 @@ class App extends React.Component {
     return (
       <>
         <Game
+          setAutoplayMode={this.setAutoplayMode}
           loadSavedScore={this.loadSavedScore}
           changeAppMode={this.changeAppMode}
           topScore={topRate}
           handleScore={this.handleScore}
           sounds={sounds}
           settings={settings}
+          autoplay={autoplay}
         />
         <InfoBlock />
         <audio

@@ -26,11 +26,41 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    const { autoplay } = this.props;
     const storedGameState = JSON.parse(localStorage.getItem('gameState'));
     if (storedGameState) {
       this.setState(storedGameState);
     }
-    window.addEventListener('keydown', this.globalClickHandler);
+    if (!autoplay) {
+      window.addEventListener('keydown', this.globalClickHandler);
+    } else {
+      const { settings } = this.props;
+      window.removeEventListener('keydown', this.globalClickHandler);
+      this.setState(getGameState(settings.board));
+      this.interval = setInterval(() => {
+        const { cellMap, cellProps } = this.state;
+        let isCellShifted = false;
+        if (!isCellShifted) {
+          isCellShifted = this.verticalShift(cellMap, cellProps, 'top');
+        }
+        if (!isCellShifted) {
+          isCellShifted = this.verticalShift(cellMap, cellProps, 'bottom');
+        }
+        if (!isCellShifted) {
+          isCellShifted = this.horizontalShift(cellMap, cellProps, 'right');
+        }
+        if (!isCellShifted) {
+          isCellShifted = this.horizontalShift(cellMap, cellProps, 'left');
+        }
+
+        setTimeout(() => {
+          if (isCellShifted) {
+            const { cellProps: cellPropsUpdated } = this.state;
+            this.setState({ cellProps: addRandomCell(cellPropsUpdated) });
+          }
+        }, 100);
+      }, 500);
+    }
     setTimeout(() => {
       const { isGameOver, isPlayerWon } = this.state;
       if (isGameOver || isPlayerWon) {
@@ -56,6 +86,7 @@ class Game extends React.Component {
   }
 
   componentWillUnmount() {
+    clearInterval(this.interval);
     window.removeEventListener('keydown', this.globalClickHandler);
     this.saveGameState();
   }
@@ -157,7 +188,14 @@ class Game extends React.Component {
       isGameOver,
       isPlayerWon,
     } = this.state;
-    const { changeAppMode, topScore, handleScore, settings } = this.props;
+    const {
+      changeAppMode,
+      topScore,
+      handleScore,
+      settings,
+      autoplay,
+      setAutoplayMode,
+    } = this.props;
     let actualTopScore = 0;
     if (gameScore > topScore) {
       actualTopScore = gameScore;
@@ -168,6 +206,8 @@ class Game extends React.Component {
     return (
       <div className="game">
         <GameHeader
+          setAutoplayMode={setAutoplayMode}
+          autoplay={autoplay}
           settings={settings}
           score={gameScore}
           shiftScore={shiftScore}
@@ -213,5 +253,7 @@ Game.propTypes = {
     board: PropTypes.number.isRequired,
     theme: PropTypes.string.isRequired,
   }).isRequired,
+  autoplay: PropTypes.bool.isRequired,
+  setAutoplayMode: PropTypes.func.isRequired,
 };
 export default Game;

@@ -12,6 +12,8 @@ export default function GameHeader({
   startNewGame,
   shiftScore,
   settings,
+  autoplay,
+  setAutoplayMode,
 }) {
   return (
     <div className="game__header">
@@ -25,7 +27,12 @@ export default function GameHeader({
           bestScore={bestScore}
           shiftScore={shiftScore}
         />
-        <GameBtns changeAppMode={changeAppMode} startNewGame={startNewGame} />
+        <GameBtns
+          changeAppMode={changeAppMode}
+          startNewGame={startNewGame}
+          autoplay={autoplay}
+          setAutoplayMode={setAutoplayMode}
+        />
       </div>
     </div>
   );
@@ -45,4 +52,6 @@ GameHeader.propTypes = {
     board: PropTypes.number.isRequired,
     theme: PropTypes.string.isRequired,
   }).isRequired,
+  autoplay: PropTypes.bool.isRequired,
+  setAutoplayMode: PropTypes.func.isRequired,
 };

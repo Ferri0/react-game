@@ -40,10 +40,15 @@ class Menu extends React.Component {
       settings,
       handleSettingsChange,
       confirmMusic,
+      setAutoplayMode,
     } = this.props;
     if (menuPage === 'main') {
       return (
-        <Main setMenuPage={this.setMenuPage} changeAppMode={changeAppMode} />
+        <Main
+          setMenuPage={this.setMenuPage}
+          changeAppMode={changeAppMode}
+          setAutoplayMode={setAutoplayMode}
+        />
       );
     }
     if (menuPage === 'challenges') {
@@ -92,6 +97,7 @@ Menu.propTypes = {
   }).isRequired,
   handleSettingsChange: PropTypes.func.isRequired,
   confirmMusic: PropTypes.func.isRequired,
+  setAutoplayMode: PropTypes.func.isRequired,
 };
 
 export default Menu;

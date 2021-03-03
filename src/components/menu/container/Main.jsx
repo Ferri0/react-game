@@ -6,11 +6,11 @@ import Button from '../presentational/Button';
 // eslint-disable-next-line react/prefer-stateless-function
 class Main extends React.Component {
   render() {
-    const { changeAppMode, setMenuPage } = this.props;
+    const { changeAppMode, setMenuPage, setAutoplayMode } = this.props;
     const menuBtnsNames = [
       'Keep Going',
       'New Game',
-      'Challenges',
+      'Autoplay',
       'Settings',
       'How To Play',
       'Rate',
@@ -30,6 +30,17 @@ class Main extends React.Component {
               }
               changeAppMode('inGame');
             }}
+            innerText={btnName}
+          />
+        );
+      }
+
+      if (btnName.toLowerCase() === 'autoplay') {
+        return (
+          <Button
+            key="autoplay"
+            className="menu__button"
+            onClick={() => setAutoplayMode(true)}
             innerText={btnName}
           />
         );
@@ -62,6 +73,7 @@ class Main extends React.Component {
 Main.propTypes = {
   setMenuPage: PropTypes.func.isRequired,
   changeAppMode: PropTypes.func.isRequired,
+  setAutoplayMode: PropTypes.func.isRequired,
 };
 
 export default Main;
