@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
+import s from './FullScreenBtn.module.scss';
 
 function launchFullScreen() {
   const element = document.getElementById('root');
@@ -23,13 +24,13 @@ function cancelFullscreen() {
 }
 
 function toggleFullScreenMode(e) {
-  if (e.target.classList.contains('full-screen-btn--off')) {
+  if (e.target.classList.contains(s.FullScreenBtn__off)) {
     cancelFullscreen();
   } else {
     launchFullScreen();
   }
-  e.target.classList.toggle('full-screen-btn--on');
-  e.target.classList.toggle('full-screen-btn--off');
+  e.target.classList.toggle(s.FullScreenBtn__on);
+  e.target.classList.toggle(s.FullScreenBtn__off);
 }
 
 export default function FullScreenBtn() {
@@ -39,7 +40,7 @@ export default function FullScreenBtn() {
       onClick={(e) => {
         toggleFullScreenMode(e);
       }}
-      className="full-screen-btn full-screen-btn--on"
+      className={[s.FullScreenBtn, s.FullScreenBtn__on].join(' ')}
     />
   );
 }

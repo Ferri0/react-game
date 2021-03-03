@@ -3,10 +3,10 @@ import React, { Fragment } from 'react';
 import Menu from './menu/Menu';
 import Game from './game/statefull/Game';
 import InfoBlock from './InfoBlock';
-import SoundModal from './soundModal/SoundModal';
+import SoundModal from './sound-modal';
 import soundsObj from './audio/sounds';
 import mobileAndTabletCheck from './game/util/mobileAndTabletCheck';
-import FullScreenBtn from './FullScreenBtn';
+import FullScreenBtn from './full-screen-btn';
 
 class App extends React.Component {
   constructor(props) {
