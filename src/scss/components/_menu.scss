@@ -155,6 +155,23 @@ select {
 .menu__tutorial {
   width: $menu-block-width;
   height: $menu-block-height;
+  padding: 0.5rem;
   background-color: $menu-block-bg-color;
   border-radius: $border-radius;
+  @include flex(column, space-between, center);
+
+  & span {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &--text {
+    color: $menu-btn-text-color;
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  &--img {
+    width: 80%;
+  }
 }

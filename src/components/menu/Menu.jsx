@@ -68,7 +68,12 @@ class Menu extends React.Component {
       return <Rate returnToMain={this.returnToMain} rate={rate} />;
     }
     if (menuPage === 'tutorial') {
-      return <Tutorial returnToMain={this.returnToMain} />;
+      return (
+        <Tutorial
+          returnToMain={this.returnToMain}
+          winNum={settings.difficulty}
+        />
+      );
     }
     return Error('Wrong value of menuPage state property in Menu component');
   }
