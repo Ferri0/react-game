@@ -5,10 +5,12 @@ import Game from './game/statefull/Game';
 import InfoBlock from './InfoBlock';
 import SoundModal from './soundModal/SoundModal';
 import soundsObj from './audio/sounds';
+import mobileAndTabletCheck from './game/util/mobileAndTabletCheck';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    window.mobileAndTabletCheck = mobileAndTabletCheck;
     this.state = {
       mode: 'inMenu',
       autoplay: false,

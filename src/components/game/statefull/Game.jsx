@@ -11,6 +11,8 @@ import checkLoseCondition from '../util/checkLoseCondition';
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    this.xDown = null;
+    this.yDown = null;
     const { settings } = this.props;
     const { cellProps, cellMap } = getGameState(settings.board);
     this.state = {
@@ -22,6 +24,8 @@ class Game extends React.Component {
       isPlayerWon: false,
     };
     this.globalClickHandler = this.globalClickHandler.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
   }
 
@@ -31,8 +35,11 @@ class Game extends React.Component {
     if (storedGameState) {
       this.setState(storedGameState);
     }
-    if (!autoplay) {
+    if (!autoplay && !window.mobileAndTabletCheck()) {
       window.addEventListener('keydown', this.globalClickHandler);
+    } else if (!autoplay && window.mobileAndTabletCheck()) {
+      window.addEventListener('touchstart', this.handleTouchStart, false);
+      window.addEventListener('touchmove', this.handleTouchMove, false);
     } else {
       const { settings } = this.props;
       window.removeEventListener('keydown', this.globalClickHandler);
@@ -89,6 +96,56 @@ class Game extends React.Component {
     clearInterval(this.interval);
     window.removeEventListener('keydown', this.globalClickHandler);
     this.saveGameState();
+  }
+
+  handleTouchStart(e) {
+    const firstTouch = e.touches[0];
+    this.xDown = firstTouch.clientX;
+    this.yDown = firstTouch.clientY;
+  }
+
+  handleTouchMove(e) {
+    if (!this.xDown || !this.yDown) {
+      return;
+    }
+    window.removeEventListener('touchstart', this.handleTouchStart, false);
+    window.removeEventListener('touchmove', this.handleTouchMove, false);
+
+    const { cellProps, cellMap } = this.state;
+    let isCellShifted = false;
+
+    const xUp = e.touches[0].clientX;
+    const yUp = e.touches[0].clientY;
+
+    const xDiff = this.xDown - xUp;
+    const yDiff = this.yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      if (xDiff > 0) {
+        isCellShifted = this.horizontalShift(cellMap, cellProps, 'left');
+      } else {
+        isCellShifted = this.horizontalShift(cellMap, cellProps, 'right');
+      }
+    } else if (yDiff > 0) {
+      isCellShifted = this.verticalShift(cellMap, cellProps, 'top');
+    } else {
+      isCellShifted = this.verticalShift(cellMap, cellProps, 'bottom');
+    }
+
+    setTimeout(() => {
+      const { cellProps: cellPropsUpdated } = this.state;
+      if (isCellShifted) {
+        this.setState({ cellProps: addRandomCell(cellPropsUpdated) });
+      }
+      this.saveGameState();
+      const { isGameOver, isPlayerWon } = this.state;
+      if (!isGameOver && !isPlayerWon) {
+        window.addEventListener('touchstart', this.handleTouchStart, false);
+        window.addEventListener('touchmove', this.handleTouchMove, false);
+      }
+    }, 75);
+    this.xDown = null;
+    this.yDown = null;
   }
 
   gameOver() {
