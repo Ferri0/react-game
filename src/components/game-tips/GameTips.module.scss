@@ -1,0 +1,9 @@
+@import '../../scss/abstracts.scss';
+
+.gameTips {
+  height: 5rem;
+  color: $menu-btn-text-color;
+  font-weight: 700;
+  font-size: 1.6rem;
+  @include flex(column, center, flex-start);
+}

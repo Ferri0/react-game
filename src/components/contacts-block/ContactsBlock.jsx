@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import s from './ContactsBlock.module.scss';
+import './ContactsBlock.scss';
 
 export default function InfoBlock() {
   return (
@@ -8,45 +8,45 @@ export default function InfoBlock() {
       <input
         type="checkbox"
         id="info-block-radio"
-        className={s.ContactsBlock_input}
+        className="contacts-block__input"
       />
-      <div className={s.ContactsBlock_body}>
-        <label htmlFor="info-block-radio" className={s.ContactsBlock_label}>
+      <div className="contacts-block__body">
+        <label htmlFor="info-block-radio" className="contacts-block__label">
           Contacts
         </label>
-        <div className={s.ContactsBlock_body__block}>
+        <div className="contacts-block__body--block">
           <a
             href="https://github.com/Ferri0"
-            className={s.ContactsBlock_body__text}
+            className="contacts-block__body--text"
             target="_blanc"
           >
             <img
               src="/assets/GitHub-Mark-32px.png"
-              className={s.ContactsBlock_body__img}
+              className="contacts-block__body--img"
               alt="github-icon"
             />
             Ferri0 2021
           </a>
           <a
             href="https://github.com/Ferri0/react-game"
-            className={s.ContactsBlock_body__text}
+            className="contacts-block__body--text"
             target="_blanc"
           >
             <img
               src="/assets/GitHub-Mark-32px.png"
-              className={s.ContactsBlock_body__img}
+              className="contacts-block__body--img"
               alt="github-icon"
             />
             2048 repository
           </a>
           <a
             href="https://rs.school/js/"
-            className={s.ContactsBlock_body__text}
+            className="contacts-block__body--text"
             target="_blanc"
           >
             <img
               src="/assets/rs_school_js.svg"
-              className={s.ContactsBlock_body__imgRss}
+              className="contacts-block__body--img-rss"
               alt="rss-icon"
             />
             RSSchool

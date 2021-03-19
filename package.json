@@ -9,7 +9,7 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "eslint": "eslint **/*.js",
-    "eslint:fix": "eslint --fix **/*.js",
+    "eslint:fix": "eslint --fix **/*{.js,.jsx}",
     "stylelint": "stylelint **/*{.css,.scss}",
     "stylelint:fix": "stylelint **/*{.css,.scss} --fix",
     "build:dev": "webpack --mode development",

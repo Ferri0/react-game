@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { Fragment } from 'react';
-import Menu from './menu/Menu';
-import Game from './game/statefull/Game';
+import Menu from './menu';
+import Game from './game';
 import ContactsBlock from './contacts-block';
 import SoundModal from './sound-modal';
-import soundsObj from './audio/sounds';
-import mobileAndTabletCheck from './game/util/mobileAndTabletCheck';
+import soundsObj from './util/sounds';
+import mobileAndTabletCheck from './util/mobileAndTabletCheck';
 import FullScreenBtn from './full-screen-btn';
 
 class App extends React.Component {

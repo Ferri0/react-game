@@ -90,21 +90,61 @@ module.exports = (env, argv) => {
         openAnalyzer: true,
       })
     );
-    config.module.rules.push({
-      test: /\.(sa|sc|c)ss$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        'css-loader',
-        'postcss-loader',
-        'sass-loader',
-      ],
-    });
+    config.module.rules.push(
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]--[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
+        include: /\.module\.(sa|sc|c)ss$/,
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+        exclude: /\.module\.(sa|sc|c)ss$/,
+      }
+    );
   } else {
     config.devtool = 'eval-source-map';
-    config.module.rules.push({
-      test: /\.(sa|sc|c)ss$/,
-      use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-    });
+    config.module.rules.push(
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[path][local]--[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
+        include: /\.module\.(sa|sc|c)ss$/,
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        exclude: /\.module\.(sa|sc|c)ss$/,
+      }
+    );
   }
   return config;
 };

@@ -1,0 +1,12 @@
+@import '../../scss/abstracts.scss';
+
+.Title {
+  width: $menu-block-width;
+  height: $menu-title-height;
+  color: $menu-title-text-color;
+  font-weight: 700;
+  font-size: 4rem;
+  background-color: $menu-title-bg-color;
+  border-radius: $border-radius;
+  @include flex(row, center, center);
+}

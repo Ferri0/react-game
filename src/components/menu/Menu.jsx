@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Main from './container/Main';
-import Challenges from './container/Challenges';
-import Settings from './container/Settings';
-import Rate from './container/Rate';
-import Tutorial from './container/Tutorial';
+import Main from '../menu-main';
+import Settings from '../menu-settings';
+import Rate from '../menu-rate';
+import Tutorial from '../menu-tutorial';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -50,9 +49,6 @@ class Menu extends React.Component {
           setAutoplayMode={setAutoplayMode}
         />
       );
-    }
-    if (menuPage === 'challenges') {
-      return <Challenges returnToMain={this.returnToMain} />;
     }
     if (menuPage === 'settings') {
       return (

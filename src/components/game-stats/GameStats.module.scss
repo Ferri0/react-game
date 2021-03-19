@@ -1,0 +1,64 @@
+@import '../../scss/abstracts.scss';
+
+.statsBlock {
+  position: relative;
+  display: flex;
+}
+
+.statsCell {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  margin: 0 1rem 1rem 0;
+  padding-top: 0.5rem;
+  color: $menu-title-text-color;
+  font-weight: 700;
+  font-size: 2.3rem;
+  background-color: $game-bg-color;
+  border-radius: $border-radius;
+  @include flex(column, center, center);
+
+  &::before {
+    position: absolute;
+    top: 1rem;
+    color: #f1e4da;
+    font-size: 1.3rem;
+    content: 'SCORE';
+  }
+
+  &:last-child {
+    margin-right: 0;
+
+    &::before {
+      position: absolute;
+      top: 1rem;
+      color: #f1e4da;
+      font-size: 1.3rem;
+      content: 'BEST';
+    }
+  }
+}
+
+.shiftScore {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  z-index: 10;
+  color: #796e65;
+  font-weight: 700;
+  font-size: 2rem;
+  animation: fade-top;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-top {
+  from {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+}

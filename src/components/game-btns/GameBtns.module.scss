@@ -1,0 +1,36 @@
+@import '../../scss/abstracts.scss';
+
+.headerBtnsBlock {
+  display: flex;
+}
+
+.headerBtn {
+  width: 8rem;
+  height: 3.5rem;
+  margin-right: 1rem;
+  color: $game-text-color;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+  background-color: $game-btn-bg-color;
+  border: 0;
+  border-radius: $border-radius;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.25s;
+  transition-property: background-color, color;
+  @include flex(column, center, center);
+
+  &:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  &:hover {
+    color: $menu-btn-hover-text-color;
+    background-color: $game-title-bg-color;
+  }
+
+  &:focus {
+    border: 2px solid $menu-btn-text-color;
+  }
+}
