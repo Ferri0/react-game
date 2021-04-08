@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { Fragment } from 'react';
+import React from 'react';
 import Menu from './menu';
 import Game from './game';
 import ContactsBlock from './contacts-block';
@@ -7,6 +7,7 @@ import SoundModal from './sound-modal';
 import soundsObj from './util/sounds';
 import mobileAndTabletCheck from './util/mobileAndTabletCheck';
 import FullScreenBtn from './full-screen-btn';
+import { ThemeContext, themeObject } from './context';
 
 class App extends React.Component {
   constructor(props) {
@@ -159,7 +160,7 @@ class App extends React.Component {
     }
     if (mode === 'inMenu') {
       return (
-        <>
+        <ThemeContext.Provider value={themeObject}>
           <FullScreenBtn />
           <Menu
             setAutoplayMode={this.setAutoplayMode}
@@ -178,12 +179,12 @@ class App extends React.Component {
             loop
             src="/assets/audio/menu-bg.wav"
           />
-        </>
+        </ThemeContext.Provider>
       );
     }
     const topRate = rate[0] !== undefined ? rate[0] : 0;
     return (
-      <>
+      <ThemeContext.Provider value={themeObject}>
         <FullScreenBtn />
         <Game
           setAutoplayMode={this.setAutoplayMode}
@@ -202,7 +203,7 @@ class App extends React.Component {
           loop
           src="/assets/audio/menu-bg.wav"
         />
-      </>
+      </ThemeContext.Provider>
     );
   }
 }

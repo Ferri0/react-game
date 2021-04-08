@@ -3,10 +3,8 @@
 .menuButton {
   width: $menu-block-width;
   height: $menu-btn-height;
-  color: $menu-btn-text-color;
   font-weight: 700;
   font-size: 3rem;
-  background-color: $menu-btn-bg-color;
   border: 0;
   border-radius: $border-radius;
   outline: 0;
@@ -23,4 +21,14 @@
   &:focus {
     border: 2px solid $menu-btn-text-color;
   }
+}
+
+.light {
+  color: $menu-btn-text-color;
+  background-color: $menu-btn-bg-color;
+}
+
+.dark {
+  color: #c1b6ac;
+  background-color: #744220;
 }

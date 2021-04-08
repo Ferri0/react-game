@@ -4,6 +4,8 @@ import Button from '../button';
 import Title from '../title';
 import s from './Rate.module.scss';
 
+import { ThemeContext } from '../context';
+
 class Rate extends React.Component {
   returnToMain() {
     const { returnToMain } = this.props;
@@ -39,11 +41,17 @@ class Rate extends React.Component {
       <div className={s.menuBlock}>
         {Title('Rating')}
         <div className={s.rateBlock}>{rating}</div>
-        <Button
-          className={s.menuButton}
-          onClick={() => this.returnToMain()}
-          innerText="Back"
-        />
+        <ThemeContext.Consumer>
+          {({ theme }) => (
+            <Button
+              className={[s.menuButton, s[theme]].join(' ')}
+              onClick={() => {
+                this.returnToMain();
+              }}
+              innerText="Back"
+            />
+          )}
+        </ThemeContext.Consumer>
       </div>
     );
   }
