@@ -1,0 +1,21 @@
+@import '../../scss/abstracts.scss';
+
+.headerTitle {
+  width: 10rem;
+  height: 10rem;
+  color: $menu-title-text-color;
+  font-weight: 700;
+  font-size: 3.5rem;
+  border-radius: $border-radius;
+  @include flex(column, center, center);
+}
+
+.winValue1024 {
+  background-color: #c1eb89;
+}
+.winValue2048 {
+  background-color: $game-title-bg-color;
+}
+.winValue4096 {
+  background-color: #89a3eb;
+}

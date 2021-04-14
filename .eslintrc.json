@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "globalReturn": false,
+      "jsx": true
+    },
+    "babelOptions": {
+      "configFile": "./babel.config.json"
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "plugins": ["react"],
+  "rules": {}
+}

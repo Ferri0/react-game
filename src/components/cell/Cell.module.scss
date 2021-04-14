@@ -1,0 +1,115 @@
+@import '../../scss/abstracts.scss';
+
+.cellWrapper {
+  transition: all 0.15s;
+  transition-property: top, left;
+  @include flex(column, center, center);
+
+  &__boardSize9 {
+    width: 9.6rem;
+    height: 9.6rem;
+  }
+
+  &__boardSize16 {
+    width: 7.2rem;
+    height: 7.2rem;
+  }
+
+  &__boardSize25 {
+    width: 5.75rem;
+    height: 5.75rem;
+  }
+}
+
+.cellInner {
+  color: $game-cell-text-color;
+  background-color: $game-cell-bg-color;
+  border-radius: $border-radius;
+  @include flex(column, center, center);
+
+  &__boardSize9 {
+    width: 8.4rem;
+    height: 8.4rem;
+  }
+
+  &__boardSize16 {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  &__boardSize25 {
+    width: 4.55rem;
+    height: 4.55rem;
+    font-size: 2rem;
+  }
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.appear {
+  animation: appear 0.075s;
+}
+
+.value-2.value-2 {
+  background-color: #eee4da;
+}
+
+.value-4.value-4 {
+  background-color: #eee1c9;
+}
+
+.value-8.value-8 {
+  color: #f9f6f2;
+  background-color: #f3b27a;
+}
+
+.value-16.value-16 {
+  background-color: #f69664;
+}
+
+.value-32.value-32 {
+  color: #f9f6f2;
+  background-color: #f77c5f;
+}
+
+.value-64.value-64 {
+  color: #f9f6f2;
+  background-color: #f75f3b;
+}
+
+.value-128.value-128 {
+  color: #f9f6f2;
+  background-color: #edd073;
+}
+
+.value-256.value-256 {
+  color: #f9f6f2;
+  background-color: #edcc62;
+}
+
+.value-512.value-512 {
+  color: #f9f6f2;
+  background-color: #edc950;
+}
+
+.value-1024.value-1024 {
+  color: #f9f6f2;
+  background-color: #c1eb89;
+}
+
+.value-2048.value-2048 {
+  color: #f9f6f2;
+  background-color: $game-title-bg-color;
+}
+
+.value-4096.value-4096 {
+  color: #f9f6f2;
+  background-color: #89a3eb;
+}

@@ -1,0 +1,34 @@
+@import '../abstracts.scss';
+
+.menuButton {
+  width: $menu-block-width;
+  height: $menu-btn-height;
+  font-weight: 700;
+  font-size: 3rem;
+  border: 0;
+  border-radius: $border-radius;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.25s;
+  transition-property: background-color, color;
+  @include flex(row, center, center);
+
+  &:hover {
+    color: $menu-btn-hover-text-color;
+    background-color: $menu-btn-hover-bg-color;
+  }
+
+  &:focus {
+    border: 2px solid $menu-btn-text-color;
+  }
+}
+
+.light {
+  color: $menu-btn-text-color;
+  background-color: $menu-btn-bg-color;
+}
+
+.dark {
+  color: #c1b6ac;
+  background-color: #744220;
+}

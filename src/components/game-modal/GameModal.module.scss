@@ -1,0 +1,36 @@
+@import '../../scss/abstracts.scss';
+
+.modal {
+  position: absolute;
+  z-index: 10;
+  width: 96%;
+  height: 96%;
+  background-color: rgba(191, 172, 160, 0.85);
+  @include flex(column, center, center);
+}
+
+.modalTitle {
+  margin-bottom: 3rem;
+  color: #584d44;
+  font-weight: 700;
+  font-size: 4rem;
+}
+
+.modalBtn {
+  width: 8rem;
+  width: 12rem;
+  height: 4rem;
+  color: $game-text-color;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  background-color: $game-btn-bg-color;
+  border: 0;
+  border-radius: $border-radius;
+  outline: 0;
+  cursor: pointer;
+  opacity: 1 !important;
+  transition: all 0.25s;
+  transition-property: background-color, color;
+  @include flex(column, center, center);
+}
